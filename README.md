@@ -1,2 +1,2 @@
 # react-native-map-clustering
-Adding map clustering both for Android and iOs.
+Adding map clustering both for Android and iOS.
