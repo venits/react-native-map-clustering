@@ -99,7 +99,7 @@ Example of using props:
 
 ### Support and donations ;)
 
-If you need help or more customize solution email me: tomasz.przybyl.it@gmail.com
+If you need help or more customized solution email me: tomasz.przybyl.it@gmail.com
 
 **I am student so any donations will help me to create more cool modules ;)**
 
