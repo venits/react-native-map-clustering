@@ -81,20 +81,25 @@ Example of using props:
 ### Some important notes!
 
 **1. Use MapView as you would normally use MapView from react-native-maps (you can use all props). Same for markers.**
+
 **2. Make sure not to put other views than markers to MapView.**
 ```javascript
 <MapView>
     {this.state.markers}
-    <Text> Don't do that</Text>
+    <Text>Do not do that</Text>
 </MapView>
 ```
+
 **3. Is you pass array of markers make sure it is [] not Set.**
+
 **4.** Module overwrites **onRegionChangeComplete** prop so you will not be able to use it.
+
 **5. Module takes care of region change so you don't have to store region in your component state.**
 
 ### Support and donations ;)
 
 If you need help or more customize solution email me: tomasz.przybyl.it@gmail.com
+
 **I am student so any donations will help me to create more cool modules ;)
 Thanks for any donations, have a great day and Happy Coding ;)**
 
