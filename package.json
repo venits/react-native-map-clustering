@@ -1,6 +1,6 @@
 {
   "name": "react-native-map-clustering",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Map clustering both for Android and iOS",
   "main": "index.js",
   "scripts": {
@@ -25,7 +25,6 @@
   "peerDependencies": {
     "react": ">=15.4.0 || ^16.0.0-alpha",
     "react-native": ">=0.40",
-    "prop-types": "^15.5.10",
     "react-native-maps": ">=0.15.0"
   },
   "homepage": "https://github.com/venits/react-native-map-clustering#readme",

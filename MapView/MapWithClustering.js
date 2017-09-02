@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import MapView from 'react-native-maps';
 import { width as w , height as h } from 'react-native-dimension';
 import CustomMarker from './CustomMarker';
-import PropTypes from 'prop-types';
 
 const height = h(100);
 const width = w(100);
@@ -168,7 +167,3 @@ export default class MapWithClustering extends Component{
     }
 
 }
-
-MapWithClustering.propTypes = {
-    clustering: PropTypes.bool
-};
