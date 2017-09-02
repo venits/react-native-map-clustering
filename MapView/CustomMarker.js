@@ -22,12 +22,13 @@ export default class CustomMarker extends Component {
     }
 
     shouldComponentUpdate(nextProps, nextState){
-        if(this.state.props.coordinate === nextProps.props.coordinate
+       /* if(this.state.props.coordinate === nextProps.props.coordinate
         && this.state.value === nextProps.value){
             return(false);
         }else{
             return(true);
-        }
+        }*/
+        return(true);
     }
 
     render(){
