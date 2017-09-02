@@ -101,7 +101,7 @@ Example of using props:
 
 If you need help or more customized solution email me: tomasz.przybyl.it@gmail.com
 
-**I am student so any donations will help me to create more cool modules ;)**
+**I am a student so any donations will help me to create more cool modules ;)**
 
 **Thanks for any donations, have a great day and Happy Coding ;)**
 
