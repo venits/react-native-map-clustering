@@ -14,6 +14,7 @@ npm install react-native-maps --save
 react-native link react-native-maps
 ```
   - Minimum versions you need for this module:
+  
         react: >=15.4.0
         react-native >=0.40
         react-native-maps >=0.15.0
@@ -100,8 +101,9 @@ Example of using props:
 
 If you need help or more customize solution email me: tomasz.przybyl.it@gmail.com
 
-**I am student so any donations will help me to create more cool modules ;)
-Thanks for any donations, have a great day and Happy Coding ;)**
+**I am student so any donations will help me to create more cool modules ;)**
+
+**Thanks for any donations, have a great day and Happy Coding ;)**
 
 [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=XN8LRKQRBZJ86)
 
