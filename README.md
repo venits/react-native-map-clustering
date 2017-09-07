@@ -2,6 +2,9 @@
 
 Simple module that adds map clustering for both iOS and Android.
 
+Check it on github:
+https://github.com/venits/react-native-map-clustering
+
 # Pre requirements:
 
   - Install 'react-native-maps' module. You can find all information here:
@@ -50,7 +53,30 @@ import Marker from 'react-native-maps';
     <Marker coordinate={{latitude: 52.9, longitude: 19.4}} />
 </MapView>
 ```
-3. **That's all!**.
+3. **For things like animateToRegion or animateToCoordinate and other methods all you have to do is to refer to _root in your MapView reference**.
+Example:
+- Create reference to your main MapView.
+```javascript
+    <MapView
+            ref = {(ref)=>mapView=ref}
+            ...
+    </MapView>
+```
+- With that reference you can for example animateToRegion like this:
+```javascript
+    animate(){
+       let r = {
+            latitude: 42.5,
+            longitude: 15.2,
+            latitudeDelta: 7.5,
+            longitudeDelta: 7.5,
+        };
+        mapView._root.animateToRegion(r, 2000);
+    }
+```
+ 
+
+4. **That's all!**.
 
 ### Demo
 ![Alt Text](https://raw.githubusercontent.com/venits/react-native-map-clustering/master/demo.gif)
