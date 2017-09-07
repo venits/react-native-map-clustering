@@ -9,6 +9,7 @@ const width = w(100);
 const divideBy = 5;
 const clusterPercentageRange = 0.05;
 var markesWithOneValue = 0;
+var _root;
 
 export default class MapWithClustering extends Component{
 
@@ -157,7 +158,8 @@ export default class MapWithClustering extends Component{
 
         return(
           <MapView {...this.state.mapProps}
-              region = {this.state.region}
+                   ref = {(ref) => this._root=ref}
+                   region = {this.state.region}
                    onRegionChangeComplete={(region)=> {
                            this.onRegionChangeComplete(region);
                    }}>
