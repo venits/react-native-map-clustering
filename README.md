@@ -58,7 +58,7 @@ Example:
             ...
     </MapView>
 ```
-- With that reference you can for example animateToRegion like this:
+- With this reference you can for example animateToRegion like this:
 ```javascript
     animate(){
        let r = {
