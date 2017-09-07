@@ -1,10 +1,6 @@
 # React-Native-Map-Clustering
 
 Simple module that adds map clustering for both iOS and Android.
-
-Check it on github:
-https://github.com/venits/react-native-map-clustering
-
 # Pre requirements:
 
   - Install 'react-native-maps' module. You can find all information here:
@@ -75,7 +71,6 @@ Example:
     }
 ```
  
-
 4. **That's all!**.
 
 ### Demo
