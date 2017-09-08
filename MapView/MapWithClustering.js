@@ -9,6 +9,7 @@ const width = w(100);
 const divideBy = 5;
 const clusterPercentageRange = 0.05;
 var markesWithOneValue = 0;
+var _root;
 
 export default class MapWithClustering extends Component{
 
