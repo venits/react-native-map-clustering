@@ -25,12 +25,14 @@ export default class MapWithClustering extends Component{
             region: {},
             markers: new Set(),
             markersOnMap: [],
-            mapProps: null
+            mapProps: null,
+            otherChildren: []
         };
     }
 
     createMarkers(propsData){
         this.state.markers.clear();
+        this.state.otherChildren = [];
         this.state.mapProps = propsData;
         this.state.initDelta = propsData.region.latitudeDelta;
         this.state.region = propsData.region;
@@ -48,7 +50,9 @@ export default class MapWithClustering extends Component{
                       props: propsData.children.props,
                   });
                   this.state.numberOfMarkers = 1;
-                } 
+                } else {
+                  this.state.otherChildren = propsData.children
+                }
             }else{
                 markerKey = 0;
                 propsData.children.map((item)=>{
@@ -60,7 +64,10 @@ export default class MapWithClustering extends Component{
                           props: item.props
                       });
                       markerKey++;
-                  } 
+                  } else {
+                      this.state.otherChildren = this.state.otherChildren.concat(item)
+                  }
+
                 });
                 this.state.numberOfMarkers = markerKey;
             }
@@ -165,7 +172,7 @@ export default class MapWithClustering extends Component{
                    onRegionChangeComplete={(region)=> {
                            this.onRegionChangeComplete(region);
                    }}>
-              {this.state.markersOnMap}
+              {this.state.markersOnMap.concat(this.state.otherChildren)}
           </MapView>
         );
     }
