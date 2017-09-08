@@ -104,11 +104,11 @@ Example of using props:
 
 **1. Use MapView as you would normally use MapView from react-native-maps (you can use all props). Same for markers.**
 
-**2. Make sure not to put other views than markers to MapView.**
+~~2. Make sure not to put other views than markers to MapView.~~
 ```javascript
 <MapView>
     {this.state.markers}
-    <Text>Do not do that</Text>
+    <Text>Allowed now</Text>
 </MapView>
 ```
 

@@ -26,41 +26,51 @@ export default class MapWithClustering extends Component{
             region: {},
             markers: new Set(),
             markersOnMap: [],
-            mapProps: null
+            mapProps: null,
+            otherChildren: []
         };
     }
 
     createMarkers(propsData){
         this.state.markers.clear();
+        this.state.otherChildren = [];
         this.state.mapProps = propsData;
         this.state.initDelta = propsData.region.latitudeDelta;
         this.state.region = propsData.region;
+        this.state.numberOfMarkers = 0;
 
         if(propsData.children !== undefined){
-            let size = propsData.children.length;
-
-            if(size === undefined){
+            if(propsData.children.length === undefined){
                 // one marker no need for clustering
-                this.state.numberOfMarkers = 1;
-                this.state.markers.add({
-                    key: 1,
-                    belly: new Set(),
-                    value: 1,
-                    uid: 1,
-                    props: propsData.children.props,
-                });
+                if(item.props && item.props.coordinate){
+                  this.state.markers.add({
+                      key: 1,
+                      belly: new Set(),
+                      value: 1,
+                      uid: 1,
+                      props: propsData.children.props,
+                  });
+                  this.state.numberOfMarkers = 1;
+                } else {
+                  this.state.otherChildren = propsData.children
+                }
             }else{
-                this.state.numberOfMarkers = size;
                 markerKey = 0;
                 propsData.children.map((item)=>{
-                    this.state.markers.add({
-                        key: markerKey,
-                        belly: new Set(),
-                        value: 1,
-                        props: item.props
-                    });
-                    markerKey++;
+                    if(item.props && item.props.coordinate){
+                      this.state.markers.add({
+                          key: markerKey,
+                          belly: new Set(),
+                          value: 1,
+                          props: item.props
+                      });
+                      markerKey++;
+                  } else {
+                      this.state.otherChildren = this.state.otherChildren.concat(item)
+                  }
+
                 });
+                this.state.numberOfMarkers = markerKey;
             }
             this.calculateCluster(1, this.state.initDelta*clusterPercentageRange);
         }
@@ -158,12 +168,12 @@ export default class MapWithClustering extends Component{
 
         return(
           <MapView {...this.state.mapProps}
+              region = {this.state.region}
                    ref = {(ref) => this._root=ref}
-                   region = {this.state.region}
                    onRegionChangeComplete={(region)=> {
                            this.onRegionChangeComplete(region);
                    }}>
-              {this.state.markersOnMap}
+              {this.state.markersOnMap.concat(this.state.otherChildren)}
           </MapView>
         );
     }
