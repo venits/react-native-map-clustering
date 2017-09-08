@@ -1,6 +1,10 @@
 # React-Native-Map-Clustering
 
 Simple module that adds map clustering for both iOS and Android.
+
+Check it on github:
+https://github.com/venits/react-native-map-clustering
+
 # Pre requirements:
 
   - Install 'react-native-maps' module. You can find all information here:
@@ -49,29 +53,7 @@ import Marker from 'react-native-maps';
     <Marker coordinate={{latitude: 52.9, longitude: 19.4}} />
 </MapView>
 ```
-3. **For things like animateToRegion or animateToCoordinate and other methods, all you have to do is to refer to _root in your MapView reference**.
-Example:
-- Create reference to your main MapView.
-```javascript
-    <MapView
-            ref = {(ref)=>mapView=ref}
-            ...
-    </MapView>
-```
-- With this reference you can for example animateToRegion like this:
-```javascript
-    animate(){
-       let r = {
-            latitude: 42.5,
-            longitude: 15.2,
-            latitudeDelta: 7.5,
-            longitudeDelta: 7.5,
-        };
-        mapView._root.animateToRegion(r, 2000);
-    }
-```
- 
-4. **That's all!**.
+3. **That's all!**.
 
 ### Demo
 ![Alt Text](https://raw.githubusercontent.com/venits/react-native-map-clustering/master/demo.gif)
@@ -104,11 +86,19 @@ Example of using props:
 
 **1. Use MapView as you would normally use MapView from react-native-maps (you can use all props). Same for markers.**
 
-**2. Is you pass array of markers make sure it is [] not Set.**
+**2. Make sure not to put other views than markers to MapView.**
+```javascript
+<MapView>
+    {this.state.markers}
+    <Text>Do not do that</Text>
+</MapView>
+```
 
-**3.** Module overwrites **onRegionChangeComplete** prop so you will not be able to use it.
+**3. Is you pass array of markers make sure it is [] not Set.**
 
-**4. Module takes care of region change so you don't have to store region in your component state.**
+**4.** Module overwrites **onRegionChangeComplete** prop so you will not be able to use it.
+
+**5. Module takes care of region change so you don't have to store region in your component state.**
 
 ### Support and donations ;)
 

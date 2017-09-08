@@ -8,7 +8,6 @@ const width = w(100);
 
 const divideBy = 5;
 const clusterPercentageRange = 0.05;
-var markesWithOneValue = 0;
 var _root;
 
 export default class MapWithClustering extends Component{
@@ -27,55 +26,45 @@ export default class MapWithClustering extends Component{
             markers: new Set(),
             markersOnMap: [],
             mapProps: null,
-            otherChildren: []
         };
     }
 
     createMarkers(propsData){
         this.state.markers.clear();
-        this.state.otherChildren = [];
         this.state.mapProps = propsData;
         this.state.initDelta = propsData.region.latitudeDelta;
         this.state.region = propsData.region;
         this.state.numberOfMarkers = 0;
 
         if(propsData.children !== undefined){
-            if(propsData.children.length === undefined){
+            let size = propsData.children.length;
+
+            if(size === undefined){
                 // one marker no need for clustering
-                if(item.props && item.props.coordinate){
-                  this.state.markers.add({
-                      key: 1,
-                      belly: new Set(),
-                      value: 1,
-                      uid: 1,
-                      props: propsData.children.props,
-                  });
-                  this.state.numberOfMarkers = 1;
-                } else {
-                  this.state.otherChildren = propsData.children
-                }
+                this.state.numberOfMarkers = 1;
+                this.state.markers.add({
+                    key: 1,
+                    belly: new Set(),
+                    value: 1,
+                    uid: 1,
+                    props: propsData.children.props,
+                });
             }else{
+                this.state.numberOfMarkers = size;
                 markerKey = 0;
                 propsData.children.map((item)=>{
-                    if(item.props && item.props.coordinate){
-                      this.state.markers.add({
-                          key: markerKey,
-                          belly: new Set(),
-                          value: 1,
-                          props: item.props
-                      });
-                      markerKey++;
-                  } else {
-                      this.state.otherChildren = this.state.otherChildren.concat(item)
-                  }
-
+                    this.state.markers.add({
+                        key: markerKey,
+                        belly: new Set(),
+                        value: 1,
+                        props: item.props
+                    });
+                    markerKey++;
                 });
-                this.state.numberOfMarkers = markerKey;
             }
             this.calculateCluster(1, this.state.initDelta*clusterPercentageRange);
         }
     }
-
     componentWillReceiveProps(nextProps){
         this.createMarkers(nextProps);
     }
@@ -86,21 +75,20 @@ export default class MapWithClustering extends Component{
 
     onRegionChangeComplete(region) {
         this.state.region = region;
-            if(this.state.numberOfMarkers > 1 && this.state.enableClustering) {
-                if(region.latitudeDelta- this.state.initDelta >  this.state.initDelta/divideBy){
-                    this.state.initDelta = region.latitudeDelta;
-                    this.calculateCluster(1, region.latitudeDelta*clusterPercentageRange);
-                }if(region.latitudeDelta- this.state.initDelta < - this.state.initDelta/divideBy){
-                    this.state.initDelta = region.latitudeDelta;
-                    this.calculateCluster(-1, region.latitudeDelta*clusterPercentageRange);
-                }
+        if(this.state.numberOfMarkers > 1 && this.state.enableClustering) {
+            if(region.latitudeDelta- this.state.initDelta >  this.state.initDelta/divideBy){
+                this.state.initDelta = region.latitudeDelta;
+                this.calculateCluster(1, region.latitudeDelta*clusterPercentageRange);
+            }if(region.latitudeDelta- this.state.initDelta < - this.state.initDelta/divideBy){
+                this.state.initDelta = region.latitudeDelta;
+                this.calculateCluster(-1, region.latitudeDelta*clusterPercentageRange);
             }
+        }
         this.setState({region: region});
     }
 
     calculateCluster(direction, clusterRange){
         if(this.state.enableClustering) {
-            markesWithOneValue = 0;
             this.state.markers.forEach((marker) => {
                 let belly = marker.belly;
                 let y = marker.props.coordinate.latitude;
@@ -118,7 +106,6 @@ export default class MapWithClustering extends Component{
                                 marker.value += childMarker.value;
                                 this.state.markers.delete(childMarker);
                             }}});
-                    if(marker.value === 1){ markesWithOneValue++; }
                 }else{
                     belly.forEach( (childMarker) => {
                         let y2 = childMarker.props.coordinate.latitude;
@@ -135,9 +122,8 @@ export default class MapWithClustering extends Component{
                 // makrers on map for given set
                 this.state.markersOnMap = [];
                 this.state.markers.forEach((marker)=>{
-                    //marksOnMap.push(<CustomMarker rerender = {this.progressToReRenderMap.bind(this)} {...marker.props}/>);
                     this.state.markersOnMap.push(<CustomMarker clusterColor = {this.state.clusterColor} {...marker}
-                               clusterTextColor = {this.state.clusterTextColor} clusterBorderColor = {this.state.clusterBorderColor}
+                                                               clusterTextColor = {this.state.clusterTextColor} clusterBorderColor = {this.state.clusterBorderColor}
                                                                clusterBorderWidth = {this.state.clusterBorderWidth}
                     >{marker.props.children}</CustomMarker>);
                 });
@@ -146,7 +132,6 @@ export default class MapWithClustering extends Component{
         }else{
             this.state.markersOnMap = [];
             this.state.markers.forEach((marker)=>{
-                //marksOnMap.push(<CustomMarker rerender = {this.progressToReRenderMap.bind(this)} {...marker.props}/>);
                 this.state.markersOnMap.push(<CustomMarker {...marker}>{marker.props.children}</CustomMarker>);
             });
             this.setState(this.state);
@@ -167,14 +152,14 @@ export default class MapWithClustering extends Component{
         this.state.clusterBorderWidth = this.props.clusterBorderWidth;
 
         return(
-          <MapView {...this.state.mapProps}
-              region = {this.state.region}
-                   ref = {(ref) => this._root=ref}
-                   onRegionChangeComplete={(region)=> {
-                           this.onRegionChangeComplete(region);
-                   }}>
-              {this.state.markersOnMap.concat(this.state.otherChildren)}
-          </MapView>
+            <MapView {...this.state.mapProps}
+                     region = {this.state.region}
+                     ref = {(ref) => this._root=ref}
+                     onRegionChangeComplete={(region)=> {
+                         this.onRegionChangeComplete(region);
+                     }}>
+                {this.state.markersOnMap}
+            </MapView>
         );
     }
 
