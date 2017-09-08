@@ -50,7 +50,7 @@ import Marker from 'react-native-maps';
     <Marker coordinate={{latitude: 52.9, longitude: 19.4}} />
 </MapView>
 ```
-3.**For things like animateToRegion or animateToCoordinate and other methods, all you have to do is to refer to _root in your MapView reference**.
+3. **For things like animateToRegion or animateToCoordinate and other methods, all you have to do is to refer to _root in your MapView reference**.
 
 Example:
 - Create reference to your main MapView.
