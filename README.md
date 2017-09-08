@@ -2,6 +2,8 @@
 
 Simple module that adds map clustering for both iOS and Android.
 
+Check it on github:
+https://github.com/venits/react-native-map-clustering
 
 # Pre requirements:
 
@@ -84,19 +86,11 @@ Example of using props:
 
 **1. Use MapView as you would normally use MapView from react-native-maps (you can use all props). Same for markers.**
 
-**2. Make sure not to put other views than markers to MapView.**
-```javascript
-<MapView>
-    {this.state.markers}
-    <Text>Do not do that</Text>
-</MapView>
-```
+**2. Is you pass array of markers make sure it is [] not Set.**
 
-**3. Is you pass array of markers make sure it is [] not Set.**
+**3.** Module overwrites **onRegionChangeComplete** prop so you will not be able to use it.
 
-**4.** Module overwrites **onRegionChangeComplete** prop so you will not be able to use it.
-
-**5. Module takes care of region change so you don't have to store region in your component state.**
+**4. Module takes care of region change so you don't have to store region in your component state.**
 
 ### Support and donations ;)
 
