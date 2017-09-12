@@ -52,6 +52,9 @@ import Marker from 'react-native-maps';
 ```
 3. **That's all!**.
 
+### Demo
+![Alt Text](https://raw.githubusercontent.com/venits/react-native-map-clustering/master/demo.gif)
+
 ### Advanced Usage
 
 **For things like animateToRegion or animateToCoordinate and other methods, all you have to do is to refer to _root in your MapView reference**.
@@ -77,8 +80,6 @@ Example:
     }
 ```
 
-### Demo
-![Alt Text](https://raw.githubusercontent.com/venits/react-native-map-clustering/master/demo.gif)
 
 ### Extra props to control your clustering
 ----
