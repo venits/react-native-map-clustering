@@ -22,16 +22,17 @@ export default class CustomMarker extends Component {
     }
 
     shouldComponentUpdate(nextProps, nextState){
-       /* if(this.state.props.coordinate === nextProps.props.coordinate
-        && this.state.value === nextProps.value){
-            return(false);
-        }else{
-            return(true);
-        }*/
+        /* if(this.state.props.coordinate === nextProps.props.coordinate
+         && this.state.value === nextProps.value){
+             return(false);
+         }else{
+             return(true);
+         }*/
         return(true);
     }
 
     render(){
+
         this.state.value = this.props.value;
         this.state.props = this.props.props;
 
@@ -87,12 +88,12 @@ export default class CustomMarker extends Component {
             isCluster = 1;
             htmlElement = (
                 <View style = {{ borderRadius: markerWidth, position: 'relative', backgroundColor: this.state.clusterColor, width: markerWidth, height: markerHeight,
-                borderWidth: this.state.clusterBorderWidth, borderColor: this.state.clusterBorderColor, justifyContent: 'center', alignItems: 'center'}}>
-                <Text
-                    style = {{width: markerWidth, textAlign: 'center',
-                         fontSize: textSize, backgroundColor: 'transparent', color: this.state.clusterTextColor, fontWeight: 'bold'}}>
-                    {textForCluster}</Text>
-            </View>);
+                    borderWidth: this.state.clusterBorderWidth, borderColor: this.state.clusterBorderColor, justifyContent: 'center', alignItems: 'center'}}>
+                    <Text
+                        style = {{width: markerWidth, textAlign: 'center',
+                            fontSize: textSize, backgroundColor: 'transparent', color: this.state.clusterTextColor, fontWeight: 'bold'}}>
+                        {textForCluster}</Text>
+                </View>);
         }else{
             isCluster = 0;
             if(this.props.children !== undefined){
@@ -101,6 +102,29 @@ export default class CustomMarker extends Component {
                 htmlElement = (null);
             }
         }
+
+        if(isCluster === 1){
+            if(this.props.onClusterPress){
+                return(
+                    <Marker
+                        key = {isCluster}
+                        {...this.state.props}
+                        onPress = {()=>{
+                            this.props.onClusterPress(this.state.props.coordinate);
+                        }}>
+                        {htmlElement}
+                    </Marker>
+                );
+            }else{
+                return(
+                    <Marker
+                        key = {isCluster}
+                        {...this.state.props}>
+                        {htmlElement}
+                    </Marker>
+                );
+            }
+        }else{
             return(
                 <Marker
                     key = {isCluster}
@@ -108,6 +132,7 @@ export default class CustomMarker extends Component {
                     {htmlElement}
                 </Marker>
             );
+        }
     }
 }
 

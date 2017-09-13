@@ -2,6 +2,9 @@
 
 Simple module that adds map clustering for both iOS and Android.
 
+Check it on github:
+https://github.com/venits/react-native-map-clustering
+
 # Pre requirements:
 
   - Install 'react-native-maps' module. You can find all information here:
@@ -57,7 +60,7 @@ import Marker from 'react-native-maps';
 
 ### Advanced Usage
 
-**For things like animateToRegion or animateToCoordinate and other methods, all you have to do is to refer to _root in your MapView reference**.
+- **For things like animateToRegion or animateToCoordinate and other methods, all you have to do is to refer to _root in your MapView reference**.
 
 Example:
 - Create reference to your main MapView.
@@ -80,6 +83,30 @@ Example:
     }
 ```
 
+- **If you want to control cluster on click event, here is example of zooming in to your cluster position:**
+1. Define you zoom animation function:
+```javascript
+    animate(coordinate){
+       let newRegion = {
+            latitude: coordinate.latitude,
+            longitude: coordinate.longitude,
+            latitudeDelta: mapView.state.region.latitudeDelta - 1,
+            longitudeDelta: mapView.state.region.longitudeDelta - 1,
+        };
+        mapView._root.animateToRegion(newRegion, 1000);
+    }
+```
+2. Add **onClusterPress** prop to your MapView.
+```javascript
+    <MapView
+        ref = {(ref)=>mapView=ref}
+        onClusterPress={(coordinate)=>{
+            this.animate(coordinate);
+        }}
+       ...
+    </MapView>
+```
+3. **That's all, now press you cluster and enjoy your zoom animation ;)**
 
 ### Extra props to control your clustering
 ----
@@ -90,6 +117,7 @@ Example:
 | clusterTextColor   | String | #FF5252 | Color of text in cluster.                                      |
 | clusterBorderColor | String | #FF5252 | Color of border. Set to transparent if you don't want borders. |
 | clusterBorderWidth | Int    | 1       | Width of border. Set to 0 if you don't want borders.           |
+| onClusterPress | Function    | null       | Allows you to control cluster on click event.  Function returns coordinate of cluster.         |
 
 Example of using props:
 ```javascript

@@ -10,9 +10,9 @@ const divideBy = 5;
 const clusterPercentageRange = 0.05;
 var _root;
 
-export default class MapWithClustering extends Component{
+export default class MapWithClustering extends Component {
 
-    constructor(){
+    constructor() {
         super();
         this.state = {
             enableClustering: true,
@@ -30,7 +30,7 @@ export default class MapWithClustering extends Component{
         };
     }
 
-    createMarkers(propsData){
+    createMarkers(propsData) {
         this.state.markers.clear();
         this.state.mapProps = propsData;
         this.state.initDelta = propsData.region.latitudeDelta;
@@ -38,12 +38,12 @@ export default class MapWithClustering extends Component{
         this.state.numberOfMarkers = 0;
         this.state.otherChildren = [];
 
-        if(propsData.children !== undefined){
+        if (propsData.children !== undefined) {
             let size = propsData.children.length;
 
-            if(size === undefined){
+            if (size === undefined) {
                 // one marker no need for clustering
-                if(propsData.children.props && propsData.children.props.coordinate){
+                if (propsData.children.props && propsData.children.props.coordinate) {
                     this.state.markers.add({
                         key: 1,
                         belly: new Set(),
@@ -55,13 +55,13 @@ export default class MapWithClustering extends Component{
                 } else {
                     this.state.otherChildren = propsData.children
                 }
-            }else{
+            } else {
                 let newArray = [];
-                propsData.children.map((item)=>{
-                    if(item.length === 0 || item.length === undefined){
+                propsData.children.map((item) => {
+                    if (item.length === 0 || item.length === undefined) {
                         newArray.push(item);
-                    }else{
-                        item.map((child)=>{
+                    } else {
+                        item.map((child) => {
                             newArray.push(child);
                         });
                     }
@@ -69,8 +69,8 @@ export default class MapWithClustering extends Component{
 
                 this.state.numberOfMarkers = size;
                 markerKey = 0;
-                newArray.map((item)=>{
-                    if(item.props && item.props.coordinate){
+                newArray.map((item) => {
+                    if (item.props && item.props.coordinate) {
                         this.state.markers.add({
                             key: markerKey,
                             belly: new Set(),
@@ -78,92 +78,101 @@ export default class MapWithClustering extends Component{
                             props: item.props
                         });
                         markerKey++;
-                    }else {
+                    } else {
                         this.state.otherChildren.push(item);
                     }
                 });
             }
-            this.calculateCluster(1, this.state.initDelta*clusterPercentageRange);
+            this.calculateCluster(1, this.state.initDelta * clusterPercentageRange);
         }
     }
-    componentWillReceiveProps(nextProps){
+
+    componentWillReceiveProps(nextProps) {
+        this.state.onClusterPress = nextProps.onClusterPress;
         this.createMarkers(nextProps);
     }
 
-    componentWillMount(){
+    componentWillMount() {
         this.createMarkers(this.props);
     }
 
     onRegionChangeComplete(region) {
         this.state.region = region;
-        if(this.state.numberOfMarkers > 1 && this.state.enableClustering) {
-            if(region.latitudeDelta- this.state.initDelta >  this.state.initDelta/divideBy){
+        if (this.state.numberOfMarkers > 1 && this.state.enableClustering) {
+            if (region.latitudeDelta - this.state.initDelta > this.state.initDelta / divideBy) {
                 this.state.initDelta = region.latitudeDelta;
-                this.calculateCluster(1, region.latitudeDelta*clusterPercentageRange);
-            }if(region.latitudeDelta- this.state.initDelta < - this.state.initDelta/divideBy){
+                this.calculateCluster(1, region.latitudeDelta * clusterPercentageRange);
+            }
+            if (region.latitudeDelta - this.state.initDelta < -this.state.initDelta / divideBy) {
                 this.state.initDelta = region.latitudeDelta;
-                this.calculateCluster(-1, region.latitudeDelta*clusterPercentageRange);
+                this.calculateCluster(-1, region.latitudeDelta * clusterPercentageRange);
             }
         }
         this.setState({region: region});
     }
 
-    calculateCluster(direction, clusterRange){
-        if(this.state.enableClustering) {
+    calculateCluster(direction, clusterRange) {
+        if (this.state.enableClustering) {
             this.state.markers.forEach((marker) => {
                 let belly = marker.belly;
                 let y = marker.props.coordinate.latitude;
                 let x = marker.props.coordinate.longitude;
                 let id = marker.key;
 
-                if(direction === 1){
-                    this.state.markers.forEach( (childMarker) => {
+                if (direction === 1) {
+                    this.state.markers.forEach((childMarker) => {
                         let id2 = childMarker.key;
-                        if(id !== id2){
+                        if (id !== id2) {
                             let y2 = childMarker.props.coordinate.latitude;
                             let x2 = childMarker.props.coordinate.longitude;
-                            if(Math.abs(y-y2) < clusterRange && Math.abs(x-x2) < clusterRange){
+                            if (Math.abs(y - y2) < clusterRange && Math.abs(x - x2) < clusterRange) {
                                 belly.add(childMarker);
                                 marker.value += childMarker.value;
                                 this.state.markers.delete(childMarker);
-                            }}});
-                }else{
-                    belly.forEach( (childMarker) => {
+                            }
+                        }
+                    });
+                } else {
+                    belly.forEach((childMarker) => {
                         let y2 = childMarker.props.coordinate.latitude;
                         let x2 = childMarker.props.coordinate.longitude;
-                        if(Math.abs(y-y2) > clusterRange || Math.abs(x-x2) > clusterRange){
+                        if (Math.abs(y - y2) > clusterRange || Math.abs(x - x2) > clusterRange) {
                             belly.delete(childMarker);
                             marker.value -= childMarker.value;
                             this.state.markers.add(childMarker);
-                        }});}
+                        }
+                    });
+                }
             });
-            if(direction === -1){
+            if (direction === -1) {
                 this.calculateCluster(1, clusterRange);
-            }else{
+            } else {
                 // makrers on map for given set
                 this.state.markersOnMap = [];
-                this.state.markers.forEach((marker)=>{
-                    this.state.markersOnMap.push(<CustomMarker clusterColor = {this.state.clusterColor} {...marker}
-                                                               clusterTextColor = {this.state.clusterTextColor} clusterBorderColor = {this.state.clusterBorderColor}
-                                                               clusterBorderWidth = {this.state.clusterBorderWidth}
+                this.state.markers.forEach((marker) => {
+                    this.state.markersOnMap.push(<CustomMarker clusterColor={this.state.clusterColor} {...marker}
+                                                               clusterTextColor={this.state.clusterTextColor}
+                                                               clusterBorderColor={this.state.clusterBorderColor}
+                                                               clusterBorderWidth={this.state.clusterBorderWidth}
+                                                               onClusterPress = {this.state.onClusterPress}
                     >{marker.props.children}</CustomMarker>);
                 });
                 this.setState(this.state);
             }
-        }else{
+        } else {
             this.state.markersOnMap = [];
-            this.state.markers.forEach((marker)=>{
+            this.state.markers.forEach((marker) => {
                 this.state.markersOnMap.push(<CustomMarker {...marker}>{marker.props.children}</CustomMarker>);
             });
             this.setState(this.state);
         }
     }
 
-    render(){
+    render() {
         let clustering = this.props.clustering;
-        if(clustering === false || clustering === true){
+        if (clustering === false || clustering === true) {
             this.state.enableClustering = clustering;
-        }else{
+        } else {
             this.state.enableClustering = true;
         }
 
@@ -172,11 +181,11 @@ export default class MapWithClustering extends Component{
         this.state.clusterBorderColor = this.props.clusterBorderColor;
         this.state.clusterBorderWidth = this.props.clusterBorderWidth;
 
-        return(
+        return (
             <MapView {...this.state.mapProps}
-                     region = {this.state.region}
-                     ref = {(ref) => this._root=ref}
-                     onRegionChangeComplete={(region)=> {
+                     region={this.state.region}
+                     ref={(ref) => this._root = ref}
+                     onRegionChangeComplete={(region) => {
                          this.onRegionChangeComplete(region);
                      }}>
                 {this.state.markersOnMap}
