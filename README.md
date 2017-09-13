@@ -2,8 +2,6 @@
 
 Simple module that adds map clustering for both iOS and Android.
 
-Check it on github:
-https://github.com/venits/react-native-map-clustering
 
 # Pre requirements:
 
@@ -82,8 +80,9 @@ Example:
         mapView._root.animateToRegion(r, 2000);
     }
 ```
+### Advanced Usage #2
 
-- **If you want to control cluster on click event, here is example of zooming in to your cluster position:**
+**If you want to control cluster on click event, here is example of zooming in to your cluster position:**
 1. Define you zoom animation function:
 ```javascript
     animate(coordinate){
