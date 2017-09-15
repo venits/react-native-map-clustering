@@ -89,8 +89,8 @@ Example:
        let newRegion = {
             latitude: coordinate.latitude,
             longitude: coordinate.longitude,
-            latitudeDelta: mapView.state.region.latitudeDelta - 1,
-            longitudeDelta: mapView.state.region.longitudeDelta - 1,
+            latitudeDelta: mapView.state.region.latitudeDelta - mapView.state.region.latitudeDelta/2,
+            longitudeDelta: mapView.state.region.longitudeDelta - mapView.state.region.longitudeDelta/2,
         };
         mapView._root.animateToRegion(newRegion, 1000);
     }
