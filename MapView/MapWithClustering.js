@@ -147,7 +147,6 @@ export default class MapWithClustering extends Component {
             if (direction === -1) {
                 this.calculateCluster(1, clusterRange);
             } else {
-                // makrers on map for given set
                 this.state.markersOnMap = [];
                 this.state.markers.forEach((marker) => {
                     this.state.markersOnMap.push(<CustomMarker clusterColor={this.state.clusterColor} {...marker}

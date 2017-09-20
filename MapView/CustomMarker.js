@@ -86,11 +86,11 @@ export default class CustomMarker extends Component {
         let isCluster;
         if(textForCluster !== ''){
             isCluster = 1;
-            if( typeof this.props.customClusterMarkerDesign !== 'undefined' && this.props.customClusterMarkerDesign !== null && this.props.customClusterMarkerDesign !== ''){
-                htmlElement = <View>
-                    <Text style = {{width: markerWidth, textAlign: 'center',
-                                fontSize: textSize, backgroundColor: 'transparent', color: this.state.clusterTextColor, fontWeight: 'bold'}}
-                        children = {textForCluster}/>
+            if(this.props.customClusterMarkerDesign && typeof this.props.customClusterMarkerDesign === "object"){
+                htmlElement = <View style = {{width: markerWidth, height: markerHeight, justifyContent: 'center', alignItems: 'center'}}>
+                    <Text style = {{width: markerWidth, textAlign: 'center', position:'absolute',
+                        fontSize: textSize, backgroundColor: 'transparent', color: this.state.clusterTextColor, fontWeight: 'bold'}}
+                          children = {textForCluster}/>
                     {this.props.customClusterMarkerDesign}
                 </View>;
             }else{

@@ -2,8 +2,11 @@
 
 Simple module that adds map clustering for both iOS and Android.
 
+Check it on github:
+https://github.com/venits/react-native-map-clustering
 
-# Pre requirements:
+
+### Pre requirements:
 
   - Install 'react-native-maps' module. You can find all information here:
  https://github.com/airbnb/react-native-maps
@@ -15,7 +18,7 @@ npm install react-native-maps --save
 react-native link react-native-maps
 ```
   - Minimum versions you need for this module:
-  
+
         react: >=15.4.0
         react-native >=0.40
         react-native-maps >=0.15.0
@@ -106,6 +109,22 @@ Example:
     </MapView>
 ```
 3. **That's all, now press you cluster and enjoy your zoom animation ;)**
+### Advanced Usage #3
+
+**Adding custom cluster design:** (Added in version 1.1.5)
+You can pass prop called **customClusterMarkerDesign** with you HTML element that will be used as background for cluster.
+
+Example:
+```javascript
+    <MapView
+        customClusterMarkerDesign =
+        {(<Image style = {{width: imageWidth, height:imageHeight}}
+        source = {require('./customCluster.png')}/>)}
+           ...
+    </MapView>
+```
+
+**That's all!**
 
 ### Extra props to control your clustering
 ----
@@ -117,13 +136,14 @@ Example:
 | clusterBorderColor | String | #FF5252 | Color of border. Set to transparent if you don't want borders. |
 | clusterBorderWidth | Int    | 1       | Width of border. Set to 0 if you don't want borders.           |
 | onClusterPress | Function    | null       | Allows you to control cluster on click event.  Function returns coordinate of cluster.         |
+| customClusterMarkerDesign | HTML element    | null       | Custom background for you clusters.           |
 
 Example of using props:
 ```javascript
 <MapView
     clustering = {true}
     clusterColor = '#000'
-    clusterTextColor = '#fff' 
+    clusterTextColor = '#fff'
     clusterBorderColor = '#fff'
     clusterBorderWidth = {4}
     region={{latitude: 52.5, longitude: 19.2,
