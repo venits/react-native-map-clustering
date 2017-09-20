@@ -2,9 +2,6 @@
 
 Simple module that adds map clustering for both iOS and Android.
 
-Check it on github:
-https://github.com/venits/react-native-map-clustering
-
 
 ### Pre requirements:
 
