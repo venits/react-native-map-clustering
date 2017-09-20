@@ -134,7 +134,7 @@ Example:
 | clusterBorderColor | String | #FF5252 | Color of border. Set to transparent if you don't want borders. |
 | clusterBorderWidth | Int    | 1       | Width of border. Set to 0 if you don't want borders.           |
 | onClusterPress | Function    | null       | Allows you to control cluster on click event.  Function returns coordinate of cluster.         |
-| customClusterMarkerDesign | HTML element    | null       | Custom background for you clusters.           |
+| customClusterMarkerDesign | HTML element    | null       | Custom background for your clusters.           |
 
 Example of using props:
 ```javascript
