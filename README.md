@@ -109,6 +109,7 @@ Example:
 ### Advanced Usage #3
 
 **Adding custom cluster design:** (Added in version 1.1.5)
+
 You can pass prop called **customClusterMarkerDesign** with you HTML element that will be used as background for cluster.
 
 Example:
