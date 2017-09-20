@@ -86,14 +86,23 @@ export default class CustomMarker extends Component {
         let isCluster;
         if(textForCluster !== ''){
             isCluster = 1;
-            htmlElement = (
-                <View style = {{ borderRadius: markerWidth, position: 'relative', backgroundColor: this.state.clusterColor, width: markerWidth, height: markerHeight,
-                    borderWidth: this.state.clusterBorderWidth, borderColor: this.state.clusterBorderColor, justifyContent: 'center', alignItems: 'center'}}>
-                    <Text
-                        style = {{width: markerWidth, textAlign: 'center',
-                            fontSize: textSize, backgroundColor: 'transparent', color: this.state.clusterTextColor, fontWeight: 'bold'}}>
-                        {textForCluster}</Text>
-                </View>);
+            if( typeof this.props.customClusterMarkerDesign !== 'undefined' && this.props.customClusterMarkerDesign !== null && this.props.customClusterMarkerDesign !== ''){
+                htmlElement = <View>
+                    <Text style = {{width: markerWidth, textAlign: 'center',
+                                fontSize: textSize, backgroundColor: 'transparent', color: this.state.clusterTextColor, fontWeight: 'bold'}}
+                        children = {textForCluster}/>
+                    {this.props.customClusterMarkerDesign}
+                </View>;
+            }else{
+                htmlElement = (
+                    <View style = {{ borderRadius: markerWidth, position: 'relative', backgroundColor: this.state.clusterColor, width: markerWidth, height: markerHeight,
+                        borderWidth: this.state.clusterBorderWidth, borderColor: this.state.clusterBorderColor, justifyContent: 'center', alignItems: 'center'}}>
+                        <Text
+                            style = {{width: markerWidth, textAlign: 'center',
+                                fontSize: textSize, backgroundColor: 'transparent', color: this.state.clusterTextColor, fontWeight: 'bold'}}>
+                            {textForCluster}</Text>
+                    </View>);
+            }
         }else{
             isCluster = 0;
             if(this.props.children !== undefined){

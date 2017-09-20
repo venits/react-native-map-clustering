@@ -155,6 +155,7 @@ export default class MapWithClustering extends Component {
                                                                clusterBorderColor={this.state.clusterBorderColor}
                                                                clusterBorderWidth={this.state.clusterBorderWidth}
                                                                onClusterPress = {this.state.onClusterPress}
+                                                               customClusterMarkerDesign = {this.props.customClusterMarkerDesign}
                     >{marker.props.children}</CustomMarker>);
                 });
                 this.setState(this.state);
