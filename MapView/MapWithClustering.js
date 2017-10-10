@@ -70,7 +70,7 @@ export default class MapWithClustering extends Component {
                 this.state.numberOfMarkers = size;
                 markerKey = 0;
                 newArray.map((item) => {
-                    if (item.props && item.props.coordinate) {
+                    if (item.props && item.props.coordinate && !item.props.disableClustering) {
                         this.state.markers.add({
                             key: markerKey,
                             belly: new Set(),
