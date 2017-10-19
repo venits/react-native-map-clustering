@@ -2,6 +2,9 @@
 
 Simple module that adds map clustering for both iOS and Android.
 
+### Updates:
+- 1.2.0 version brings new algorithm based on supercluster library. It's super fast now ;)
+
 
 ### Pre requirements:
 
