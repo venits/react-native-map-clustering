@@ -64,7 +64,7 @@ Example:
 - Create reference to your main MapView.
 ```javascript
     <MapView
-            ref = {(ref)=>mapView=ref}
+            ref = {(ref)=>this.mapView=ref}
             ...
     </MapView>
 ```
@@ -77,7 +77,7 @@ Example:
             latitudeDelta: 7.5,
             longitudeDelta: 7.5,
         };
-        mapView._root.animateToRegion(r, 2000);
+        this.mapView._root.animateToRegion(r, 2000);
     }
 ```
 ### Advanced Usage #2
@@ -89,16 +89,16 @@ Example:
        let newRegion = {
             latitude: coordinate.latitude,
             longitude: coordinate.longitude,
-            latitudeDelta: mapView.state.region.latitudeDelta - mapView.state.region.latitudeDelta/2,
-            longitudeDelta: mapView.state.region.longitudeDelta - mapView.state.region.longitudeDelta/2,
+            latitudeDelta: this.mapView.state.region.latitudeDelta - this.mapView.state.region.latitudeDelta/2,
+            longitudeDelta: this.mapView.state.region.longitudeDelta - this.mapView.state.region.longitudeDelta/2,
         };
-        mapView._root.animateToRegion(newRegion, 1000);
+        this.mapView._root.animateToRegion(newRegion, 1000);
     }
 ```
 2. Add **onClusterPress** prop to your MapView.
 ```javascript
     <MapView
-        ref = {(ref)=>mapView=ref}
+        ref = {(ref)=>this.mapView=ref}
         onClusterPress={(coordinate)=>{
             this.animate(coordinate);
         }}
@@ -154,11 +154,9 @@ Example of using props:
 
 **1. Use MapView as you would normally use MapView from react-native-maps (you can use all props). Same for markers.**
 
-**2. Is you pass array of markers make sure it is [] not Set.**
+**2.** Module overwrites **onRegionChangeComplete** prop so you will not be able to use it.
 
-**3.** Module overwrites **onRegionChangeComplete** prop so you will not be able to use it.
-
-**4. Module takes care of region change so you don't have to store region in your component state.**
+**3. Module takes care of region change so you don't have to store region in your component state.**
 
 ### Support and donations ;)
 
