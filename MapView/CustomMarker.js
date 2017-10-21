@@ -29,8 +29,10 @@ export default class CustomMarker extends Component {
 
     render(){
         this.state.point_count = this.props.properties.point_count;
-        if(this.props.props){
+        if(this.state.point_count === 0){
             this.state.props = this.props.props;
+        }else{
+            this.state.props = {};
         }
 
         let coordinates = {longitude: this.props.geometry.coordinates[0],
