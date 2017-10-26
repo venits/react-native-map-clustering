@@ -166,6 +166,9 @@ export default class MapWithClustering extends Component {
                      region={this.state.region}
                      ref={(ref) => this._root = ref}
                      onRegionChangeComplete={(region) => {
+                         if( this.state.mapProps.onRegionChangeComplete){
+                             this.state.mapProps.onRegionChangeComplete(region);
+                         }
                          this.onRegionChangeComplete(region);
                      }}>
                 {this.state.markersOnMap}
