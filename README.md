@@ -153,14 +153,6 @@ Example of using props:
 </MapView>
 ```
 
-### Some important notes!
-
-**1. Use MapView as you would normally use MapView from react-native-maps (you can use all props). Same for markers.**
-
-**2.** Module overwrites **onRegionChangeComplete** prop so you will not be able to use it.
-
-**3. Module takes care of region change so you don't have to store region in your component state.**
-
 ### Support and donations ;)
 
 If you need help or more customized solution email me: tomasz.przybyl.it@gmail.com
