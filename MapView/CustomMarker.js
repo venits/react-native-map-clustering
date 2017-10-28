@@ -123,15 +123,8 @@ export default class CustomMarker extends Component {
                     </Marker>
                 );
             }
-        }else{
-            return(
-                <Marker
-                    key = {isCluster}
-                    coordinate = {coordinates}
-                    {...this.state.props}>
-                    {htmlElement}
-                </Marker>
-            );
+        } else {
+            return (htmlElement);
         }
     }
 }
