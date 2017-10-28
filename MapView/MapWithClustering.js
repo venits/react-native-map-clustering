@@ -147,7 +147,7 @@ export default class MapWithClustering extends Component {
             for(let i = 0; i < this.state.markers.length; i++){
                 this.state.markersOnMap.push(
                     <CustomMarker key = {i} {...this.state.markers[i]}>
-                        { this.state.markers[i].properties.point_count === 0 ?  this.state.markers[i].props.children : null }
+                        { cluster[i].properties.point_count === 0 ?  cluster[i] : null }
                     </CustomMarker>
                 );
             }
