@@ -30,7 +30,7 @@ export default class CustomMarker extends Component {
     render(){
         this.state.point_count = this.props.properties.point_count;
         if(this.state.point_count === 0){
-            this.state.props = this.props.props;
+            this.state.props = this.props.item.props;
         }else{
             this.state.props = {};
         }
@@ -93,11 +93,7 @@ export default class CustomMarker extends Component {
             }
         }else{
             isCluster = 0;
-            if(this.props.children !== undefined){
-                htmlElement = this.props.children;
-            }else{
-                htmlElement = (null);
-            }
+            htmlElement = this.props.item;
         }
 
         if(isCluster === 1){
@@ -123,8 +119,8 @@ export default class CustomMarker extends Component {
                     </Marker>
                 );
             }
-        } else {
-            return (htmlElement);
+        }else{
+            return(htmlElement);
         }
     }
 }

@@ -48,7 +48,7 @@ export default class MapWithClustering extends Component {
                 // one marker no need for clustering
                 if (propsData.children.props && propsData.children.props.coordinate) {
                     this.state.markers.push({
-                        props:  propsData.children.props,
+                        item: propsData.children,
                         properties: {point_count: 0},
                         geometry: {
                             type: "Point",
@@ -75,8 +75,7 @@ export default class MapWithClustering extends Component {
                 newArray.map((item) => {
                     if (item.props && item.props.coordinate) {
                         this.state.markers.push({
-                            ...item,
-                            props:  item.props,
+                            item: item,
                             properties: {point_count: 0},
                             geometry: {
                                 type: "Point",
@@ -139,7 +138,7 @@ export default class MapWithClustering extends Component {
                 this.state.markersOnMap.push(
                     <CustomMarker key = {i} onClusterPress = {this.state.onClusterPress}
                                   customClusterMarkerDesign = {this.props.customClusterMarkerDesign} {...cluster[i]}>
-                        { cluster[i].properties.point_count === 0 ?  cluster[i] : null }
+                        { cluster[i].properties.point_count === 0 ?  cluster[i].item : null }
                     </CustomMarker>
 
                 );
@@ -148,7 +147,7 @@ export default class MapWithClustering extends Component {
             for(let i = 0; i < this.state.markers.length; i++){
                 this.state.markersOnMap.push(
                     <CustomMarker key = {i} {...this.state.markers[i]}>
-                        { this.state.markers[i].properties.point_count === 0 ?  this.state.markers[i].props.children : null }
+                        { this.state.markers[i].properties.point_count === 0 ?  this.state.markers[i].item : null }
                     </CustomMarker>
                 );
             }
@@ -165,6 +164,7 @@ export default class MapWithClustering extends Component {
         return (
             <MapView {...this.state.mapProps}
                      region={this.state.region}
+                     initialRegion={this.state.region}
                      ref={(ref) => this._root = ref}
                      onRegionChangeComplete={(region) => {
                          if( this.state.mapProps.onRegionChangeComplete){
