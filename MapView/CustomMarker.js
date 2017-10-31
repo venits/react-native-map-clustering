@@ -15,6 +15,7 @@ export default class CustomMarker extends Component {
             coordinates: null,
             props: {},
             point_count: 0,
+            clusterId: null
         };
     }
 
@@ -32,6 +33,7 @@ export default class CustomMarker extends Component {
         if(this.state.point_count === 0){
             this.state.props = this.props.item.props;
         }else{
+            this.state.clusterId = this.props.properties.cluster_id;
             this.state.props = {};
         }
 
@@ -104,7 +106,8 @@ export default class CustomMarker extends Component {
                         {...this.state.props}
                         coordinate = {coordinates}
                         onPress = {()=>{
-                            this.props.onClusterPress(this.state.coordinates);
+                            let markers = superCluster.getLeaves(this.state.clusterId);
+                            this.props.onClusterPress(this.state.coordinates, markers);
                         }}>
                         {htmlElement}
                     </Marker>

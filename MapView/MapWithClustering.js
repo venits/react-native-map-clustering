@@ -8,7 +8,6 @@ import geoViewport from '@mapbox/geo-viewport';
 const height = h(100);
 const width = w(100);
 const divideBy = 7;
-var superCluster;
 
 export default class MapWithClustering extends Component {
 
@@ -87,7 +86,7 @@ export default class MapWithClustering extends Component {
                     }
                 });
             }
-            superCluster = SuperCluster({
+            GLOBAL.superCluster = SuperCluster({
                 radius: width/22,
                 maxZoom: 20
             });
