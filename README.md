@@ -108,8 +108,21 @@ Example:
        ...
     </MapView>
 ```
-3. **That's all, now press you cluster and enjoy your zoom animation ;)**
+
 ### Advanced Usage #3
+Added in version: 1.2.4
+
+**Getting info about markers in selected cluster:**
+```javascript
+    <MapView
+       onClusterPress = {(coordinates,markers)=>{
+      console.warn(JSON.stringify(markers))
+    }}
+       ...
+    </MapView>
+```
+
+### Advanced Usage #4
 
 **Adding custom cluster design:** (Added in version 1.1.5)
 
