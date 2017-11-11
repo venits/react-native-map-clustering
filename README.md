@@ -140,6 +140,19 @@ Example:
 
 **That's all!**
 
+### Advanced Usage #5
+
+**Excluding marker from being clustered at all.** (Added in version 1.2.6)
+
+All you have to do is to add 'cluster' prop to marker like this:
+
+```javascript
+ <Marker
+     cluster = {false}
+     coordinate={{latitude: x, longitude: y}}>
+ </Marker>
+```
+
 ### Extra props to control your clustering
 ----
 | Name               | Type   | Default | Note                                                           |
