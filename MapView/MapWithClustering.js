@@ -72,7 +72,9 @@ export default class MapWithClustering extends Component {
 
                 this.state.numberOfMarkers = newArray.length;
                 newArray.map((item) => {
-                    if (item.props && item.props.coordinate) {
+                    let canBeClustered = true;
+                    item.props.cluster === undefined ? canBeClustered = true : canBeClustered = item.props.cluster;
+                    if (item.props && item.props.coordinate && canBeClustered) {
                         this.state.markers.push({
                             item: item,
                             properties: {point_count: 0},
