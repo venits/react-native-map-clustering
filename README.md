@@ -158,6 +158,7 @@ All you have to do is to add 'cluster' prop to marker like this:
 | Name               | Type   | Default | Note                                                           |
 |--------------------|--------|---------|----------------------------------------------------------------|
 | clustering         | bool   | true    | Set true to enable and false to disable clustering.            |
+| radius         | Int   | 17    | Controls range of clustering.           |
 | clusterColor       | String | #F5F5F5 | Background color of cluster.                                         |
 | clusterTextColor   | String | #FF5252 | Color of text in cluster.                                      |
 | clusterBorderColor | String | #FF5252 | Color of border. Set to transparent if you don't want borders. |
