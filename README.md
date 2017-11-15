@@ -37,7 +37,7 @@ import MapView from 'react-native-map-clustering';
 ```
 - Import Marker
 ```javascript
-import Marker from 'react-native-maps';
+import { Marker } from 'react-native-maps';
 ```
 2. Add this to your render method (you can put your own markers and region):
 ```javascript
