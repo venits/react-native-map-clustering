@@ -163,6 +163,7 @@ All you have to do is to add 'cluster' prop to marker like this:
 | clusterTextColor   | String | #FF5252 | Color of text in cluster.                                      |
 | clusterBorderColor | String | #FF5252 | Color of border. Set to transparent if you don't want borders. |
 | clusterBorderWidth | Int    | 1       | Width of border. Set to 0 if you don't want borders.           |
+| clusterTextSize | Int    | 18       | Text size for clusters.           |
 | onClusterPress | Function    | null       | Allows you to control cluster on click event.  Function returns coordinate of cluster.         |
 | customClusterMarkerDesign | HTML element    | null       | Custom background for your clusters.           |
 
