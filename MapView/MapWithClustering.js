@@ -131,7 +131,7 @@ export default class MapWithClustering extends Component {
             if(this.state.region.longitudeDelta>=40){
                 zoom = 0;
             }else{
-                zoom = this.getZoomLevel(bbox).zoom;
+                zoom = this.getZoomLevel(bbox).zoom || 0;
             }
             let cluster = superCluster.getClusters([bbox[0], bbox[1], bbox[2], bbox[3]], zoom);
 
