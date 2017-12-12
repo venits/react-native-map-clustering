@@ -23,6 +23,7 @@ export default class MapWithClustering extends Component {
             otherChildren: [],
             numberOfMarkers: 0,
         };
+        this.superCluster = Symbol('superCluster');
     }
 
     componentWillReceiveProps(nextProps) {
@@ -88,11 +89,11 @@ export default class MapWithClustering extends Component {
                     }
                 });
             }
-            GLOBAL.superCluster = SuperCluster({
+            GLOBAL[this.superCluster] = SuperCluster({
                 radius: width/22,
                 maxZoom: 20
             });
-            superCluster.load(this.state.markers);
+            GLOBAL[this.superCluster].load(this.state.markers);
             this.calculateClustersForMap();
         }
     }
@@ -133,13 +134,16 @@ export default class MapWithClustering extends Component {
             }else{
                 zoom = this.getZoomLevel(bbox).zoom || 0;
             }
-            let cluster = superCluster.getClusters([bbox[0], bbox[1], bbox[2], bbox[3]], zoom);
+            let cluster = GLOBAL[this.superCluster].getClusters([bbox[0], bbox[1], bbox[2], bbox[3]], zoom);
 
             for(let i = 0; i < cluster.length; i++){
                 this.state.markersOnMap.push(
                     <CustomMarker key = {i} onClusterPress = {this.state.onClusterPress}
                                   customClusterMarkerDesign = {this.props.customClusterMarkerDesign} {...cluster[i]}
-                                  getClusterColor = {this.props.setClusterColor}>
+                                  getClusterColor = {this.props.setClusterColor}
+                                  superCluster={this.superCluster}
+
+                    >
                         { cluster[i].properties.point_count === 0 ?  cluster[i].item : null }
                     </CustomMarker>
 
