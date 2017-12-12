@@ -78,7 +78,7 @@ export default class CustomMarker extends Component {
         let clusterColor;
         let markers;
         if (this.state.clusterId) {
-            markers = superCluster.getLeaves(this.state.clusterId);
+            markers = GLOBAL[this.props.superCluster].getLeaves(this.state.clusterId);
         }
 
         if (this.props.getClusterColor && markers) {
@@ -132,7 +132,7 @@ export default class CustomMarker extends Component {
                         coordinate = {coordinates}
                         onPress = {()=>{
                             if (!markers) {
-                                markers = superCluster.getLeaves(this.state.clusterId);
+                                markers = GLOBAL[this.props.superCluster].getLeaves(this.state.clusterId);
                             }
                             this.props.onClusterPress(this.state.coordinates, markers);
                         }}>
