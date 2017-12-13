@@ -90,7 +90,7 @@ export default class MapWithClustering extends Component {
                 });
             }
             GLOBAL[this.superCluster] = SuperCluster({
-                radius: width/22,
+                radius: width/this.props.radius,
                 maxZoom: 20
             });
             GLOBAL[this.superCluster].load(this.state.markers);
@@ -166,6 +166,7 @@ export default class MapWithClustering extends Component {
         this.state.clustering = this.props.clustering;
         GLOBAL.clusterColor = this.props.clusterColor;
         GLOBAL.clusterTextColor = this.props.clusterTextColor;
+        GLOBAL.clusterTextSize = this.props.clusterTextSize;
         GLOBAL.clusterBorderColor = this.props.clusterBorderColor;
         GLOBAL.clusterBorderWidth = this.props.clusterBorderWidth;
 
@@ -189,7 +190,9 @@ export default class MapWithClustering extends Component {
 MapWithClustering.defaultProps = {
     clusterColor: '#F5F5F5',
     clusterTextColor: '#FF5252',
+    clusterTextSize: 17,
     clusterBorderColor: '#FF5252',
     clusterBorderWidth: 1,
-    clustering: true
+    clustering: true,
+    radius: 22,
 };
