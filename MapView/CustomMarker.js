@@ -49,27 +49,27 @@ export default class CustomMarker extends Component {
             textForCluster = point_count.toString();
             markerWidth = width*2/15;
             markerHeight = width*2/15;
-            textSize = height/40;
+            textSize = GLOBAL.clusterTextSize;
         }if(point_count>10&&point_count<=25){
             textForCluster = '10+';
             markerWidth = width/7;
             markerHeight = width/7;
-            textSize = height/40;
+            textSize = GLOBAL.clusterTextSize;
         }if(point_count>25&&point_count<=50){
             textForCluster = '25+';
             markerWidth = width*2/13;
             markerHeight = width*2/13;
-            textSize = height/40;
+            textSize = GLOBAL.clusterTextSize;
         }if(point_count>50&&point_count<=100){
             textForCluster = '50+';
             markerWidth = width/6;
             markerHeight = width/6;
-            textSize = height/38;
+            textSize = GLOBAL.clusterTextSize;
         }if(point_count>100){
             textForCluster = '100+';
             markerWidth = width*2/11;
             markerHeight = width*2/11;
-            textSize = height/38;
+            textSize = GLOBAL.clusterTextSize;
         }
 
         if(GLOBAL.clusterTextSize){
