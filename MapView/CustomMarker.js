@@ -28,7 +28,18 @@ export default class CustomMarker extends Component {
         }
     }
 
+    componentDidCatch (error) {
+        if (__DEV__) {
+            console.error(error);
+        }
+        this.setState({ error });
+    }
+
     render(){
+        if (this.state.error) {
+            return null;
+        }
+
         this.state.point_count = this.props.properties.point_count;
         if(this.state.point_count === 0){
             this.state.props = this.props.item.props;
@@ -78,7 +89,15 @@ export default class CustomMarker extends Component {
         let clusterColor;
         let markers;
         if (this.state.clusterId) {
-            markers = GLOBAL[this.props.superCluster].getLeaves(this.state.clusterId);
+            try {
+                markers = GLOBAL[this.props.superCluster].getLeaves(this.state.clusterId);
+            } catch (error) {
+                if (__DEV__) {
+                    console.log(this.state.clusterId + ' - ' + error.message);
+                    // console.error(error);
+                }
+                return null;
+            }
         }
 
         if (this.props.getClusterColor && markers) {
