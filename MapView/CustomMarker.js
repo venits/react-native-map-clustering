@@ -7,9 +7,9 @@ const height = h(100);
 const width = w(100);
 
 export default class CustomMarker extends Component {
-
     constructor(props){
         super(props);
+
         this.state = {
             isLoaded:false,
             coordinates: null,
@@ -20,11 +20,13 @@ export default class CustomMarker extends Component {
     }
 
     shouldComponentUpdate(nextProps, nextState){
-        if(this.state.geometry === nextProps.geometry
-            && this.state.point_count === nextProps.properties.point_count){
-            return(false);
-        }else{
-            return(true);
+        if (
+            this.state.geometry === nextProps.geometry
+            && this.state.point_count === nextProps.properties.point_count
+        ){
+            return false;
+        } else {
+            return true;
         }
     }
 
@@ -35,66 +37,74 @@ export default class CustomMarker extends Component {
         this.setState({ error });
     }
 
+    handlePress = ()=>{
+        if (!markers) {
+            markers = GLOBAL[this.props.superCluster].getLeaves(clusterId);
+        }
+        this.props.onClusterPress(coordinates, markers);
+    }
+
     render(){
         if (this.state.error) {
             return null;
         }
 
-        this.state.point_count = this.props.properties.point_count;
-        if(this.state.point_count === 0){
-            this.state.props = this.props.item.props;
-        }else{
-            this.state.clusterId = this.props.properties.cluster_id;
-            this.state.props = {};
+        let pointCount = this.props.properties.point_count;
+        let itemProps = {};
+        let clusterId;
+
+        if (pointCount === 0){
+            itemProps = this.props.item.props;
+        } else {
+            clusterId = this.props.properties.cluster_id;
         }
 
-        let coordinates = {longitude: this.props.geometry.coordinates[0],
-            latitude: this.props.geometry.coordinates[1]};
-        this.state.coordinates = coordinates;
+        let coordinates = {
+            longitude: this.props.geometry.coordinates[0],
+            latitude: this.props.geometry.coordinates[1]
+        };
 
         let textForCluster = '';
         let markerWidth, markerHeight, textSize;
-        let point_count = this.state.point_count;
 
-        if(point_count>=2 && point_count<=10){
-            textForCluster = point_count.toString();
-            markerWidth = width*2/15;
-            markerHeight = width*2/15;
+        if (pointCount >= 2 && pointCount <= 10) {
+            textForCluster = pointCount;
+            markerWidth = width * 2 / 15;
+            markerHeight = width * 2 / 15;
             textSize = GLOBAL.clusterTextSize;
-        }if(point_count>10&&point_count<=25){
+        } if (pointCount > 10 && pointCount <= 25) {
             textForCluster = '10+';
-            markerWidth = width/7;
-            markerHeight = width/7;
+            markerWidth = width / 7;
+            markerHeight = width / 7;
             textSize = GLOBAL.clusterTextSize;
-        }if(point_count>25&&point_count<=50){
+        } if (pointCount > 25 && pointCount <= 50) {
             textForCluster = '25+';
-            markerWidth = width*2/13;
-            markerHeight = width*2/13;
+            markerWidth = width * 2 / 13;
+            markerHeight = width * 2 / 13;
             textSize = GLOBAL.clusterTextSize;
-        }if(point_count>50&&point_count<=100){
+        } if (pointCount > 50 && pointCount <= 100) {
             textForCluster = '50+';
-            markerWidth = width/6;
-            markerHeight = width/6;
+            markerWidth = width / 6;
+            markerHeight = width / 6;
             textSize = GLOBAL.clusterTextSize;
-        }if(point_count>100){
+        } if (pointCount > 100) {
             textForCluster = '100+';
-            markerWidth = width*2/11;
-            markerHeight = width*2/11;
+            markerWidth = width * 2 / 11;
+            markerHeight = width * 2 / 11;
             textSize = GLOBAL.clusterTextSize;
         }
 
-        if(GLOBAL.clusterTextSize){
+        if (GLOBAL.clusterTextSize) {
             textSize = GLOBAL.clusterTextSize;
         }
         let clusterColor;
         let markers;
-        if (this.state.clusterId) {
+        if (clusterId) {
             try {
-                markers = GLOBAL[this.props.superCluster].getLeaves(this.state.clusterId);
+                markers = GLOBAL[this.props.superCluster].getLeaves(clusterId);
             } catch (error) {
                 if (__DEV__) {
-                    console.log(this.state.clusterId + ' - ' + error.message);
-                    // console.error(error);
+                    console.log(clusterId + ' - ' + error.message);
                 }
                 return null;
             }
@@ -108,69 +118,120 @@ export default class CustomMarker extends Component {
 
         let htmlElement;
         let isCluster;
-        if(textForCluster !== ''){
+        if (textForCluster !== ''){
             isCluster = 1;
-            if(this.props.customClusterMarkerDesign && typeof this.props.customClusterMarkerDesign === "function") {
-                htmlElement = <View
-                    style={{width: markerWidth, height: markerHeight, justifyContent: 'center', alignItems: 'center'}}>
-                    {this.props.customClusterMarkerDesign(markers || [])}
-                    <Text style={{
-                        width: markerWidth, textAlign: 'center', position: 'absolute',
-                        fontSize: textSize, backgroundColor: 'transparent', color: clusterColor, fontWeight: 'bold'
-                    }}
-                          children={textForCluster}/>
-                </View>;
-            } else if(this.props.customClusterMarkerDesign && typeof this.props.customClusterMarkerDesign === "object"){
-                htmlElement = <View style = {{width: markerWidth, height: markerHeight, justifyContent: 'center', alignItems: 'center'}}>
-                    {this.props.customClusterMarkerDesign}
-                    <Text style = {{width: markerWidth, textAlign: 'center', position:'absolute',
-                        fontSize: textSize, backgroundColor: 'transparent', color: clusterColor, fontWeight: 'bold'}}
-                          children = {textForCluster}/>
-                </View>;
+            if (this.props.customClusterMarkerDesign && typeof this.props.customClusterMarkerDesign === "function") {
+                htmlElement = (
+                    <View
+                        style={{
+                            width: markerWidth,
+                            height: markerHeight,
+                            justifyContent: 'center',
+                            alignItems: 'center'
+                        }}
+                    >
+                        {this.props.customClusterMarkerDesign(markers || [])}
+                        <Text
+                            style={{
+                                width: markerWidth,
+                                textAlign: 'center',
+                                position: 'absolute',
+                                fontSize: textSize,
+                                backgroundColor: 'transparent',
+                                color: clusterColor,
+                                fontWeight: 'bold'
+                            }}
+                        >
+                            {textForCluster}
+                        </Text>
+                    </View>
+                );
+            } else if (this.props.customClusterMarkerDesign && typeof this.props.customClusterMarkerDesign === "object"){
+                htmlElement = (
+                    <View
+                        style={{
+                            width: markerWidth,
+                            height: markerHeight,
+                            justifyContent: 'center',
+                            alignItems: 'center'
+                        }}
+                    >
+                        {this.props.customClusterMarkerDesign}
+                        <Text
+                            style={{
+                                width: markerWidth,
+                                textAlign: 'center',
+                                position:'absolute',
+                                fontSize: textSize,
+                                backgroundColor: 'transparent',
+                                color: clusterColor,
+                                fontWeight: 'bold'
+                            }}
+                        >
+                            {textForCluster}
+                        </Text>
+                    </View>
+                );
             }else{
                 htmlElement = (
-                    <View style = {{ borderRadius: markerWidth, position: 'relative', backgroundColor: GLOBAL.clusterColor, width: markerWidth, height: markerHeight,
-                        borderWidth: GLOBAL.clusterBorderWidth, borderColor: GLOBAL.clusterBorderColor, justifyContent: 'center', alignItems: 'center'}}>
+                    <View
+                        style={{
+                            borderRadius: markerWidth,
+                            position: 'relative',
+                            backgroundColor: GLOBAL.clusterColor,
+                            width: markerWidth,
+                            height: markerHeight,
+                            borderWidth: GLOBAL.clusterBorderWidth,
+                            borderColor: GLOBAL.clusterBorderColor,
+                            justifyContent: 'center',
+                            alignItems: 'center'
+                        }}
+                    >
                         <Text
-                            style = {{width: markerWidth, textAlign: 'center',
-                                fontSize: textSize, backgroundColor: 'transparent', color: clusterColor, fontWeight: 'bold'}}>
-                            {textForCluster}</Text>
-                    </View>);
+                            style={{width: markerWidth,
+                                textAlign: 'center',
+                                fontSize: textSize,
+                                backgroundColor: 'transparent',
+                                color: clusterColor,
+                                fontWeight: 'bold'
+                            }}
+                        >
+                            {textForCluster}
+                        </Text>
+                    </View>
+                );
             }
-        }else{
+        } else {
             isCluster = 0;
             htmlElement = this.props.item;
         }
 
-        if(isCluster === 1){
-            if(this.props.onClusterPress){
+        if (isCluster === 1){
+            if (this.props.onClusterPress){
                 return(
                     <Marker
-                        key = {isCluster}
-                        {...this.state.props}
-                        coordinate = {coordinates}
-                        onPress = {()=>{
-                            if (!markers) {
-                                markers = GLOBAL[this.props.superCluster].getLeaves(this.state.clusterId);
-                            }
-                            this.props.onClusterPress(this.state.coordinates, markers);
-                        }}>
+                        key={isCluster}
+                        {...itemProps}
+                        coordinate={coordinates}
+                        onPress={this.handlePress}
+                    >
                         {htmlElement}
                     </Marker>
                 );
-            }else{
+            } else {
                 return(
                     <Marker
                         pointerEvents={'none'}
-                        key = {isCluster}
-                        coordinate = {coordinates}
-                        {...this.state.props}>
+                        key={isCluster}
+                        coordinate={coordinates}
+                        {...itemProps}
+                    >
                         {htmlElement}
                     </Marker>
                 );
             }
-        }else{
-            return(htmlElement);
+        } else {
+            return htmlElement;
         }
     }
 }
