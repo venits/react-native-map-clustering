@@ -142,6 +142,7 @@ export default class CustomMarker extends Component {
             }else{
                 return(
                     <Marker
+                        pointerEvents={'none'}
                         key = {isCluster}
                         coordinate = {coordinates}
                         {...this.state.props}>
