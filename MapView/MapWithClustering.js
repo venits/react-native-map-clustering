@@ -139,6 +139,9 @@ export default class MapWithClustering extends Component {
             } else {
                 zoom = this.getZoomLevel(bbox).zoom || 0;
             }
+            if (isNaN(zoom)) {
+                zoom = 0;
+            }
             let cluster = GLOBAL[this.superCluster].getClusters([bbox[0], bbox[1], bbox[2], bbox[3]], zoom);
 
             for(let i = 0; i < cluster.length; i++){
