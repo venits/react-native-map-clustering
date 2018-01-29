@@ -22,7 +22,7 @@ export default class MapWithClustering extends Component {
             region: props.region || props.initialRegion,
             previousRegion: props.region || props.initialRegion,
         };
-        this.superCluster = Symbol('superCluster');
+        this.superCluster = {};
     }
 
     componentWillMount() {
@@ -76,7 +76,9 @@ export default class MapWithClustering extends Component {
                     if (item.props && item.props.coordinate && canBeClustered) {
                         newState.markers.push({
                             item: item,
-                            properties: {point_count: 0},
+                            properties: {
+                                point_count: 0,
+                            },
                             geometry: {
                                 type: "Point",
                                 coordinates: [item.props.coordinate.longitude, item.props.coordinate.latitude]

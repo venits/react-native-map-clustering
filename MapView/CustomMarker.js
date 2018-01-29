@@ -37,11 +37,8 @@ export default class CustomMarker extends Component {
         this.setState({ error });
     }
 
-    handlePress = ()=>{
-        if (!markers) {
-            markers = GLOBAL[this.props.superCluster].getLeaves(clusterId);
-        }
-        this.props.onClusterPress(coordinates, markers);
+    createPressHandler = (markers) => () => {
+        this.props.onClusterPress(markers);
     }
 
     render(){
@@ -213,7 +210,7 @@ export default class CustomMarker extends Component {
                         key={isCluster}
                         {...itemProps}
                         coordinate={coordinates}
-                        onPress={this.handlePress}
+                        onPress={this.createPressHandler(markers)}
                     >
                         {htmlElement}
                     </Marker>
