@@ -97,9 +97,12 @@ export default class MapWithClustering extends Component {
                 });
 
                 newArray.forEach((item) => {
-                    const canBeClustered = typeof item.props.cluster !== 'undefined'
-                        ? item.props.cluster
-                        : true;
+                    let canBeClustered = true;
+                    if (item.props) {
+                        canBeClustered = typeof item.props.cluster !== 'undefined'
+                            ? item.props.cluster
+                            : true;
+                    }
 
                     if (item.props && item.props.coordinate && canBeClustered) {
                         markers.push({
