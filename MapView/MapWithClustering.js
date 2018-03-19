@@ -86,7 +86,7 @@ export default class MapWithClustering extends Component {
   calculateBBox = region => [
     region.longitude - region.longitudeDelta, // westLng - min lng
     region.latitude - region.latitudeDelta, // southLat - min lat
-    region.longitude + region.longitudeDelta , // eastLng - max lng
+    region.longitude + region.longitudeDelta, // eastLng - max lng
     region.latitude + region.latitudeDelta// northLat - max lat
   ];
 
@@ -151,13 +151,20 @@ export default class MapWithClustering extends Component {
     return newProps;
   };
 
+  handleRegionChangeComplete = (region) => {
+    if (this.props.onRegionChangeComplete) {
+      this.props.onRegionChangeComplete(region);
+    }
+    this.onRegionChangeComplete(region);
+  };
+
   render() {
     return (
       <MapView
         {...this.removeChildrenFromProps(this.props)}
         ref={(ref) => { this.root = ref; }}
         region={this.state.currentRegion}
-        onRegionChangeComplete={this.onRegionChangeComplete}
+        onRegionChangeComplete={this.handleRegionChangeComplete}
       >
         {this.state.clusteredMarkers}
         {this.state.otherChildren}
@@ -188,5 +195,5 @@ MapWithClustering.defaultProps = {
   clusterBorderColor: '#FF5252',
   clusterBorderWidth: 1,
   clusterTextSize: totalSize(2.4),
-  onClusterPress: () => {},
+  onClusterPress: () => { },
 };
