@@ -49,7 +49,7 @@ export default class MapWithClustering extends Component {
     const otherChildren = [];
 
     React.Children.forEach(this.props.children, (marker) => {
-      if (marker.props && marker.props.coordinate) {
+      if (marker && marker.props && marker.props.coordinate) {
         markers.push({
           marker,
           properties: { point_count: 0 },
