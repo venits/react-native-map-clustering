@@ -26,7 +26,12 @@ export default class MapWithClustering extends Component {
   };
 
   componentDidMount() {
+    this.mounted = true;
     this.createMarkersOnMap();
+  }
+
+  componentWillUnmount(){
+    this.mounted = false;
   }
 
   componentWillReceiveProps() {
@@ -75,7 +80,7 @@ export default class MapWithClustering extends Component {
     }
     this.superCluster.load(markers);
 
-    this.setState({
+    this.mounted && this.setState({
       markers,
       otherChildren,
     }, () => {
@@ -135,7 +140,7 @@ export default class MapWithClustering extends Component {
       clusteredMarkers = this.state.markers.map(marker => marker.marker);
     }
 
-    this.setState({
+    this.mounted && this.setState({
       clusteredMarkers,
       currentRegion,
     });
