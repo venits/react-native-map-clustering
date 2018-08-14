@@ -26,11 +26,11 @@ export default class MapWithClustering extends Component {
   };
 
   componentDidMount() {
-    this.createMarkersOnMap();
+    this.createMarkersOnMap(this.props);
   }
 
-  componentWillReceiveProps() {
-    this.createMarkersOnMap();
+  componentWillReceiveProps(nextProps) {
+    this.createMarkersOnMap(nextProps);
   }
 
   onRegionChangeComplete = (region) => {
@@ -44,12 +44,12 @@ export default class MapWithClustering extends Component {
     }
   };
 
-  createMarkersOnMap = () => {
+  createMarkersOnMap = props => {
     const markers = [];
     const otherChildren = [];
 
-    React.Children.forEach(this.props.children, (marker) => {
-      if (marker.props && marker.props.coordinate) {
+    React.Children.forEach(props.children, marker => {
+      if (marker && marker.props && marker.props.coordinate) {
         markers.push({
           marker,
           properties: { point_count: 0 },
@@ -68,7 +68,7 @@ export default class MapWithClustering extends Component {
 
     if (!this.superCluster) {
       this.superCluster = SuperCluster({
-        radius: this.props.radius,
+        radius: props.radius,
         maxZoom: 20,
         minZoom: 1,
       });
