@@ -9,17 +9,17 @@ export default class MapWithClustering extends Component {
   state = {
     currentRegion: this.props.region,
     clusterStyle: {
-      borderRadius: w(15),
+      borderRadius: w(this.props.clusterSize),
       backgroundColor: this.props.clusterColor,
       borderColor: this.props.clusterBorderColor,
       borderWidth: this.props.clusterBorderWidth,
-      width: w(15),
-      height: w(15),
+      width: w(this.props.clusterSize),
+      height: w(this.props.clusterSize),
       justifyContent: 'center',
-      alignItems: 'center',
+      alignItems: 'center'
     },
     clusterTextStyle: {
-      fontSize: this.props.clusterTextSize,
+      fontSize: totalSize(this.props.clusterTextSize),
       color: this.props.clusterTextColor,
       fontWeight: 'bold',
     },
@@ -175,6 +175,7 @@ MapWithClustering.propTypes = {
   clusterBorderColor: PropTypes.string,
   clusterBorderWidth: PropTypes.number,
   clusterTextSize: PropTypes.number,
+  clusterSize: PropTypes.number,
   onClusterPress: PropTypes.func,
 };
 
@@ -183,10 +184,11 @@ const totalSize = num => (Math.sqrt((h(100) * h(100)) + (w(100) * w(100))) * num
 MapWithClustering.defaultProps = {
   clustering: true,
   radius: w(5),
+  clusterSize: 15,
   clusterColor: '#F5F5F5',
   clusterTextColor: '#FF5252',
   clusterBorderColor: '#FF5252',
   clusterBorderWidth: 1,
-  clusterTextSize: totalSize(2.4),
+  clusterTextSize: 2.4,
   onClusterPress: () => {},
 };
