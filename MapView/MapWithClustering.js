@@ -8,6 +8,7 @@ import CustomMarker from './CustomMarker';
 export default class MapWithClustering extends Component {
   state = {
     currentRegion: this.props.region,
+    currentChildren: this.props.children,
     clusterStyle: {
       borderRadius: w(15),
       backgroundColor: this.props.clusterColor,
@@ -29,8 +30,19 @@ export default class MapWithClustering extends Component {
     this.createMarkersOnMap();
   }
 
-  componentWillReceiveProps() {
-    this.createMarkersOnMap();
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.children != prevState.currentChildren) {
+      return {
+        currentChildren: nextProps.children
+      };
+    } else {
+      return null
+    }
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.children !== prevProps.children) {
+      this.createMarkersOnMap(this.state.currentChildren);
+    }
   }
 
   onRegionChangeComplete = (region) => {
