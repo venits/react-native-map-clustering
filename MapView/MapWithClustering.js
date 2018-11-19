@@ -61,21 +61,23 @@ export default class MapWithClustering extends Component {
     const otherChildren = [];
 
     React.Children.forEach(this.props.children, (marker) => {
-      if (marker.props && marker.props.coordinate && marker.props.cluster !== false) {
-        markers.push({
-          marker,
-          properties: { point_count: 0 },
-          geometry: {
-            type: 'Point',
-            coordinates: [
-              marker.props.coordinate.longitude,
-              marker.props.coordinate.latitude,
-            ],
-          },
-        });
-      } else {
-        otherChildren.push(marker);
-      }
+      if (marker !== null) {
+        if (marker.props && marker.props.coordinate && marker.props.cluster !== false) {
+          markers.push({
+            marker,
+            properties: { point_count: 0 },
+            geometry: {
+              type: 'Point',
+              coordinates: [
+                marker.props.coordinate.longitude,
+                marker.props.coordinate.latitude,
+              ],
+            },
+          });
+        } else {
+          otherChildren.push(marker);
+        }
+      } 
     });
 
     if (!this.superCluster) {
