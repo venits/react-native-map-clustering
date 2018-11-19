@@ -58,6 +58,7 @@ import { Marker } from 'react-native-maps';
 
 
 ### Extra props to control your clustering
+## MapView
 ----
 | Name               | Type   | Default | Note                                                           |
 |--------------------|--------|---------|----------------------------------------------------------------|
@@ -68,6 +69,11 @@ import { Marker } from 'react-native-maps';
 | clusterBorderWidth | Int    | 1       | Width of border. Set to 0 if you don't want borders.           |
 | onClusterPress | Function    | null       | Allows you to control cluster on click event.  Function returns coordinate of cluster.         |
 
+## Marker
+----
+| Name               | Type   | Default | Note                                                           |
+|--------------------|--------|---------|----------------------------------------------------------------|
+| cluster            | bool   | null    | Set false to disable clustering for current marker.            |
 
 Example of using props:
 ```javascript
@@ -80,6 +86,7 @@ Example of using props:
     region={{latitude: 52.5, longitude: 19.2,
              latitudeDelta: 8.5, longitudeDelta: 8.5}}
     style={{width: mapWidth, height: mapHeight}}>
+    <Marker coordinate={{latitude: 52, longitude: 19}} cluster={{false}} />
 </MapView>
 ```
 
