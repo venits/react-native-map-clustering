@@ -113,11 +113,16 @@ export default class MapWithClustering extends Component {
     return Math.min(latZoom, lngZoom, ZOOM_MAX);
   };
 
+  handleClusterPress = async (cluster) => {
+    const clusterLeaves = await this.superCluster.getLeaves(cluster.properties.cluster_id, Infinity, 0);
+    this.props.onClusterPress({cluster, clusterLeaves});
+  }
+
   calculateClustersForMap = async (currentRegion = this.state.currentRegion) => {
     let clusteredMarkers = [];
 
     if (this.props.clustering && this.superCluster) {
-      const bBox = this.calculateBBox(this.state.currentRegion);
+      const bBox = this.calculateBBox(currentRegion);
       let zoom = this.getBoundsZoomLevel(bBox, { height: h(100), width: w(100) });
       const clusters = await this.superCluster.getClusters([bBox[0], bBox[1], bBox[2], bBox[3]], zoom);
 
@@ -129,7 +134,7 @@ export default class MapWithClustering extends Component {
         clusterTextStyle={this.state.clusterTextStyle}
         marker={cluster.properties.point_count === 0 ? cluster.marker : null}
         key={JSON.stringify(cluster.geometry) + cluster.properties.cluster_id + cluster.properties.point_count}
-        onClusterPress={this.props.onClusterPress}
+        onClusterPress={() => this.handleClusterPress(cluster)}
       />));
     } else {
       clusteredMarkers = this.state.markers.map(marker => marker.marker);
