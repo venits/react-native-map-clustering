@@ -67,6 +67,7 @@ import { Marker } from 'react-native-maps';
 | clusterTextColor   | String | #FF5252 | Color of text in cluster.                                      |
 | clusterBorderColor | String | #FF5252 | Color of border. Set to transparent if you don't want borders. |
 | clusterBorderWidth | Int    | 1       | Width of border. Set to 0 if you don't want borders.           |
+| customDefinedMarker | Component    | null       | Define a custom react component that is used to render the cluster markers.      |
 | onClusterPress | Function    | null       | Allows you to control cluster on click event.  Function returns coordinate of cluster.         |
 
 ## Marker
