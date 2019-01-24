@@ -87,7 +87,7 @@ Example of using props:
     region={{latitude: 52.5, longitude: 19.2,
              latitudeDelta: 8.5, longitudeDelta: 8.5}}
     style={{width: mapWidth, height: mapHeight}}>
-    <Marker coordinate={{latitude: 52, longitude: 19}} cluster={{false}} />
+    <Marker coordinate={{latitude: 52, longitude: 19}} cluster={false} />
 </MapView>
 ```
 
