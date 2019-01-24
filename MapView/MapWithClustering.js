@@ -134,8 +134,9 @@ export default class MapWithClustering extends Component {
       const bBox = this.calculateBBox(this.state.currentRegion);
       let zoom = this.getBoundsZoomLevel(bBox, { height: h(100), width: w(100) });
       const clusters = await this.superCluster.getClusters([bBox[0], bBox[1], bBox[2], bBox[3]], zoom);
-
-      clusteredMarkers = clusters.map(cluster => (<CustomMarker
+      const CustomDefinedMarker = this.props.customDefinedMarker || CustomMarker
+      
+      clusteredMarkers = clusters.map(cluster => (<CustomDefinedMarker
         pointCount={cluster.properties.point_count}
         clusterId={cluster.properties.cluster_id}
         geometry={cluster.geometry}
