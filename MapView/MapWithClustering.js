@@ -8,7 +8,6 @@ import CustomMarker from './CustomMarker';
 export default class MapWithClustering extends Component {
   state = {
     currentRegion: this.props.region,
-    currentChildren: this.props.children,
     clusterStyle: {
       borderRadius: w(15),
       backgroundColor: this.props.clusterColor,
@@ -30,19 +29,8 @@ export default class MapWithClustering extends Component {
     this.createMarkersOnMap();
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.children != prevState.currentChildren) {
-      return {
-        currentChildren: nextProps.children
-      };
-    } else {
-      return null
-    }
-  }
-  componentDidUpdate(prevProps, prevState) {
-    if (this.props.children !== prevProps.children) {
-      this.createMarkersOnMap(this.state.currentChildren);
-    }
+  componentWillReceiveProps() {
+    this.createMarkersOnMap();
   }
 
   onRegionChangeComplete = (region) => {
@@ -54,8 +42,6 @@ export default class MapWithClustering extends Component {
         this.calculateClustersForMap(region);
       }
     }
-    if(this.props.onRegionChangeComplete)
-      this.props.onRegionChangeComplete(region)
   };
 
   createMarkersOnMap = () => {
@@ -63,23 +49,21 @@ export default class MapWithClustering extends Component {
     const otherChildren = [];
 
     React.Children.forEach(this.props.children, (marker) => {
-      if (marker !== null) {
-        if (marker.props && marker.props.coordinate && marker.props.cluster !== false) {
-          markers.push({
-            marker,
-            properties: { point_count: 0 },
-            geometry: {
-              type: 'Point',
-              coordinates: [
-                marker.props.coordinate.longitude,
-                marker.props.coordinate.latitude,
-              ],
-            },
-          });
-        } else {
-          otherChildren.push(marker);
-        }
-      } 
+      if (marker.props && marker.props.coordinate && marker.props.cluster) {
+        markers.push({
+          marker,
+          properties: { point_count: 0 },
+          geometry: {
+            type: 'Point',
+            coordinates: [
+              marker.props.coordinate.longitude,
+              marker.props.coordinate.latitude,
+            ],
+          },
+        });
+      } else {
+        otherChildren.push(marker);
+      }
     });
 
     if (!this.superCluster) {
@@ -99,12 +83,24 @@ export default class MapWithClustering extends Component {
     });
   };
 
-  calculateBBox = region => [
+  calculateBBox = region => {
+    let lngD;
+    if(region.longitudeDelta < 0)
+        lngD = region.longitudeDelta + 360
+    else
+        lngD = region.longitudeDelta;     
+    return [
+        region.longitude - lngD, // westLng - min lng
+        region.latitude - region.latitudeDelta, // southLat - min lat
+        region.longitude + lngD, // eastLng - max lng
+        region.latitude + region.latitudeDelta // northLat - max lat
+    ]
+  }/*[
     region.longitude - region.longitudeDelta, // westLng - min lng
     region.latitude - region.latitudeDelta, // southLat - min lat
     region.longitude + region.longitudeDelta , // eastLng - max lng
     region.latitude + region.latitudeDelta// northLat - max lat
-  ];
+  ];*/
 
   getBoundsZoomLevel = (bounds, mapDim) => {
     const WORLD_DIM = { height: mapDim.height, width: mapDim.width };
@@ -136,9 +132,8 @@ export default class MapWithClustering extends Component {
       const bBox = this.calculateBBox(this.state.currentRegion);
       let zoom = this.getBoundsZoomLevel(bBox, { height: h(100), width: w(100) });
       const clusters = await this.superCluster.getClusters([bBox[0], bBox[1], bBox[2], bBox[3]], zoom);
-      const CustomDefinedMarker = this.props.customDefinedMarker || CustomMarker
-      
-      clusteredMarkers = clusters.map(cluster => (<CustomDefinedMarker
+
+      clusteredMarkers = clusters.map(cluster => (<CustomMarker
         pointCount={cluster.properties.point_count}
         clusterId={cluster.properties.cluster_id}
         geometry={cluster.geometry}
