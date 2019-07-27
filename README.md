@@ -7,9 +7,6 @@ Works with **Expo** and **react-native-cli**.
 
 ### Installation
 ```js
-// only if you haven't installed it before
-npm install react-native-maps --save
-//
 npm install react-native-map-clustering --save
 ```
 ### Usage
