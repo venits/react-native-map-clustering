@@ -2,6 +2,7 @@
 # React Native Map Clustering
 
 React Native module that handles map clustering for you.
+
 Works with **Expo** and **react-native-cli**.
 
 ### Installation
@@ -63,24 +64,4 @@ import { Marker } from 'react-native-maps';
 | Name               | Type   | Default | Note                                                           |
 |--------------------|--------|---------|----------------------------------------------------------------|
 | cluster            | bool   | null    | Set false to disable clustering for current marker.            |
-
-Example of using props:
-```javascript
-<MapView
-    clusterColor = '#000'
-    clusterTextColor = '#fff'
-    clusterBorderColor = '#fff'
-    clusterBorderWidth = {4}
-    style={{width: 400, height: 800}}
-    region={{latitude: 52.5, longitude: 19.2,
-             latitudeDelta: 8.5, longitudeDelta: 8.5}}
->
-    <Marker
-      coordinate={{latitude: 52, longitude: 19}}
-      cluster={false}
-    />
-	<Marker coordinate={{latitude: 52, longitude: 19}} />
-</MapView>
-```
-
 
