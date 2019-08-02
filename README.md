@@ -1,12 +1,14 @@
-
+﻿
 # React Native Map Clustering
 
 React Native module that handles map clustering for you.
-
 Works with **Expo** and **react-native-cli**.
 
 ### Installation
 ```js
+// only if you haven't installed it before
+npm install react-native-maps --save
+//
 npm install react-native-map-clustering --save
 ```
 ### Usage
@@ -48,7 +50,6 @@ import { Marker } from 'react-native-maps';
 ----
 | Name               | Type   | Default | Note                                                           |
 |--------------------|--------|---------|----------------------------------------------------------------|
-| ref         | MapView   | null    | Reference to *react-native-maps* MapView components.            |
 | clustering         | bool   | true    | Set true to enable and false to disable clustering.            |
 | clusterColor       | String | #F5F5F5 | Background color of cluster.                                         |
 | clusterTextColor   | String | #FF5252 | Color of text in cluster.                                      |
@@ -63,30 +64,23 @@ import { Marker } from 'react-native-maps';
 |--------------------|--------|---------|----------------------------------------------------------------|
 | cluster            | bool   | null    | Set false to disable clustering for current marker.            |
 
-
-
-### How To Animate Region?
-
-1. Create reference
-```js
-  <MapView ref={ref => mapView = ref } />
+Example of using props:
+```javascript
+<MapView
+    clusterColor = '#000'
+    clusterTextColor = '#fff'
+    clusterBorderColor = '#fff'
+    clusterBorderWidth = {4}
+    style={{width: 400, height: 800}}
+    region={{latitude: 52.5, longitude: 19.2,
+             latitudeDelta: 8.5, longitudeDelta: 8.5}}
+>
+    <Marker
+      coordinate={{latitude: 52, longitude: 19}}
+      cluster={false}
+    />
+	<Marker coordinate={{latitude: 52, longitude: 19}} />
+</MapView>
 ```
-2. Create **animate()** method
-```js
-const animate = () => {
-  let r = {
-    latitude: 42.5,
-    longitude: 15.2,
-    latitudeDelta: 7.5,
-    longitudeDelta: 7.5,
-  };
-  mapView.root.animateToRegion(r, 2000);
-};
-```
-3. You can call it onPress() for example:
-```js
-  <Button title="Animate" onPress={animate} />
-```
-
 
 
