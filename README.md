@@ -69,7 +69,7 @@ import { Marker } from 'react-native-maps';
 
 1. Create reference
 ```js
-ref={ref => mapView = ref }
+  <MapView ref={ref => mapView = ref } />
 ```
 2. Create **animate()** method
 ```js
