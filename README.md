@@ -83,4 +83,30 @@ Example of using props:
 </MapView>
 ```
 
+### Animtate To Region
+
+1. Create reference
+```js
+<MapView ref={ref => mapView = ref } />
+```
+
+2. Create **animate()** method
+
+```js
+const animate = () => {
+  let r = {
+    latitude: 42.5,
+    longitude: 15.2,
+    latitudeDelta: 7.5,
+    longitudeDelta: 7.5,
+  };
+  mapView.root.animateToRegion(r, 2000);
+};
+```
+
+3. You can call it anywhere:
+```js
+  <Button title="Animate" onPress={animate} />
+```
+
 
