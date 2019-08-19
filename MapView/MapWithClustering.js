@@ -4,26 +4,12 @@ import MapView from "react-native-maps";
 import { width as w, height as h } from "react-native-dimension";
 import SuperCluster from "supercluster";
 import CustomMarker from "./CustomMarker";
+import { _clusterStyle, _clusterTextStyle } from "./MapWithClustering.style";
 
 export default class MapWithClustering extends Component {
   state = {
     currentRegion: this.props.region,
-    currentChildren: this.props.children,
-    clusterStyle: {
-      borderRadius: w(15),
-      backgroundColor: this.props.clusterColor,
-      borderColor: this.props.clusterBorderColor,
-      borderWidth: this.props.clusterBorderWidth,
-      width: w(15),
-      height: w(15),
-      justifyContent: "center",
-      alignItems: "center"
-    },
-    clusterTextStyle: {
-      fontSize: this.props.clusterTextSize,
-      color: this.props.clusterTextColor,
-      fontWeight: "bold"
-    }
+    currentChildren: this.props.children
   };
 
   componentDidMount() {
@@ -175,13 +161,29 @@ export default class MapWithClustering extends Component {
       const CustomDefinedMarker =
         this.props.customDefinedMarker || CustomMarker;
 
+      const {
+        clusterStyle,
+        clusterTextStyle,
+        clusterColor,
+        clusterTextSize,
+        clusterTextColor,
+        clusterBorderWidth,
+        clusterBorderColor
+      } = this.props;
+
       clusteredMarkers = clusters.map(cluster => (
         <CustomDefinedMarker
           pointCount={cluster.properties.point_count}
           clusterId={cluster.properties.cluster_id}
           geometry={cluster.geometry}
-          clusterStyle={this.state.clusterStyle}
-          clusterTextStyle={this.state.clusterTextStyle}
+          clusterStyle={
+            clusterStyle ||
+            _clusterStyle(clusterColor, clusterBorderColor, clusterBorderWidth)
+          }
+          clusterTextStyle={
+            clusterTextStyle ||
+            _clusterTextStyle(clusterTextSize, clusterTextColor)
+          }
           marker={cluster.properties.point_count === 0 ? cluster.marker : null}
           key={
             JSON.stringify(cluster.geometry) +
