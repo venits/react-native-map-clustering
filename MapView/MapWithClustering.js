@@ -54,6 +54,10 @@ export default class MapWithClustering extends Component {
       longitudeDelta
     } = this.state.currentRegion;
 
+    if (region.longitudeDelta < 0) {
+      region.longitudeDelta += 360;
+    }
+
     if (region.longitudeDelta <= 80) {
       if (
         Math.abs(region.latitudeDelta - latitudeDelta) > latitudeDelta / 8 ||
