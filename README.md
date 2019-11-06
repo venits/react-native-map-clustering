@@ -1,7 +1,15 @@
 ﻿# React Native Map Clustering
 
 React Native module that handles map clustering for you.
+
 Works with **Expo** and **react-native-cli** 🚀
+
+This repo is proudly sponsored by:
+
+<a href="https://nativeforms.com" rel="nofollow" target="_blank">
+  <img src="https://raw.githubusercontent.com/venits/native-forms/master/assets/sponsor.png" width="350"><br />
+  NativeForms - Build forms, surveys and polls for React Native apps.
+</a>
 
 ## Demo
 
@@ -72,7 +80,7 @@ export default App;
 
 ## Support
 
-Feel free to create issues and pull request. I will try to provide as much support as possible over Github. In case of questions or problems, contact me at:
+Feel free to create issues and pull requests. I will try to provide as much support as possible over Github. In case of questions or problems, contact me at:
 [t.przybyl@venits.com](t.przybyl@venits.com)
 
 ### Happy Coding 💖
