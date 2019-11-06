@@ -1,3 +1,3 @@
-import * as MapView from './MapView/MapWithClustering';
+import * as MapView from "./lib/ClusteredMapView";
 
 module.exports = MapView;
