@@ -77,6 +77,7 @@ export default App;
 | **onRegionChangeComplete(region, markers)** | Function              | () => {}                                     | Called when map's region changes. In return you get current region and markers data.                                                                                                                                            |
 | **mapRef(ref)**                             | Function              | () => {}                                     | Return reference to `react-native-maps` MapView component.                                                                                                                                                                      |
 | **clusteringEnabled**                       | Bool                  | true                                         | Set true to enable and false to disable clustering.                                                                                                                                                                             |
+| **renderCluster**                           | Function              | undefined                                    | Enables you to render custom cluster with custom styles and logic.                                                                                                                                                              |
 
 ## Support
 
