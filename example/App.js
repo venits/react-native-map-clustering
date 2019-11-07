@@ -37,7 +37,7 @@ const App = () => {
   };
 
   return (
-    <MapView region={INITIAL_REGION} style={{ flex: 1 }}>
+    <MapView initialRegion={INITIAL_REGION} style={{ flex: 1 }}>
       {_generateMarkers(200)}
     </MapView>
   );

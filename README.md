@@ -42,7 +42,7 @@ const INITIAL_REGION = {
 };
 
 const App = () => (
-  <MapView region={INITIAL_REGION} style={{ flex: 1 }}>
+  <MapView initialRegion={INITIAL_REGION} style={{ flex: 1 }}>
     <Marker coordinate={{ latitude: 52.0, longitude: 18.2 }} />
     <Marker coordinate={{ latitude: 52.4, longitude: 18.7 }} />
     <Marker coordinate={{ latitude: 52.1, longitude: 18.4 }} />
@@ -63,7 +63,7 @@ export default App;
 | ------------------------------------------- | --------------------- | -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **clusterColor**                            | String                | #00B386                                      | Background color of cluster.                                                                                                                                                                                                    |
 | **clusterTextColor**                        | String                | #FFFFFF                                      | Color of text in cluster.                                                                                                                                                                                                       |
-| **onClusterPress(cluster, children)**       | Function              | () => {}                                     | Allows you to control cluster on click event. Function returns information about cluster and its markers.                                                                                                                       |
+| **onClusterPress(cluster, markers)**        | Function              | () => {}                                     | Allows you to control cluster on click event. Function returns information about cluster and its markers.                                                                                                                       |
 | **width**                                   | Number                | window width                                 | map's width.                                                                                                                                                                                                                    |
 | **height**                                  | Number                | window height                                | map's height.                                                                                                                                                                                                                   |
 | **radius**                                  | Number                | window.width \* 6%                           | [SuperCluster radius](https://github.com/mapbox/supercluster#options).                                                                                                                                                          |
