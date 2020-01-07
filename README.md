@@ -18,7 +18,7 @@ This repo is proudly sponsored by:
 ## Spiral
 ### Converting same locations in spiral view 
 
-![Spiral](https://github.com/chetanparmar95/react-native-map-clustering/blob/spiderfier/assets/spider_lib.png)
+![Spiral](https://raw.githubusercontent.com/chetanparmar95/react-native-map-clustering/spiderfier/assets/spider_lib.png)
 
 ## Installation
 
