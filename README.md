@@ -15,6 +15,11 @@ This repo is proudly sponsored by:
 
 ![Demo](https://raw.githubusercontent.com/venits/react-native-map-clustering/master/assets/demo.gif)
 
+## Spiral
+# Converting same locations in spiral view 
+
+![Spiral](https://raw.githubusercontent.com/chetanparmar95/react-native-map-clustering/master/assets/spider_lib.png)
+
 ## Installation
 
 ```js
@@ -51,6 +56,12 @@ const App = () => (
     <Marker coordinate={{ latitude: 53.1, longitude: 18.8 }} />
     <Marker coordinate={{ latitude: 52.9, longitude: 19.4 }} />
     <Marker coordinate={{ latitude: 52.2, longitude: 21 }} />
+
+    <Marker coordinate={{ latitude: 52.8, longitude: 22 }} />
+    <Marker coordinate={{ latitude: 52.8, longitude: 22 }} />
+    <Marker coordinate={{ latitude: 52.8, longitude: 22 }} />
+    <Marker coordinate={{ latitude: 52.8, longitude: 22 }} />
+    <Marker coordinate={{ latitude: 52.8, longitude: 22 }} />
   </MapView>
 );
 
@@ -78,6 +89,7 @@ export default App;
 | **mapRef(ref)**                             | Function              | () => {}                                     | Return reference to `react-native-maps` MapView component.                                                                                                                                                                      |
 | **clusteringEnabled**                       | Bool                  | true                                         | Set true to enable and false to disable clustering.                                                                                                                                                                             |
 | **renderCluster**                           | Function              | undefined                                    | Enables you to render custom cluster with custom styles and logic.                                                                                                                                                              |
+| **spiderLineColor**                           | String              | #FF0000                                    | Enables you to set color of spider line which joins spiral location with center location.                                                                                                                                                              |
 
 ## Support
 
