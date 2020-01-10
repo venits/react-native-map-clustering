@@ -21,6 +21,11 @@ This repo is proudly sponsored by:
 
 ![Spiral](https://raw.githubusercontent.com/venits/react-native-map-clustering/assets/assets/spider_lib.png)
 
+## Spiral
+### Converting same locations in spiral view 
+
+![Spiral](https://raw.githubusercontent.com/chetanparmar95/react-native-map-clustering/spiderfier/assets/spider_lib.png)
+
 ## Installation
 
 ```js
@@ -89,6 +94,7 @@ export default App;
 | **mapRef(ref)**                             | Function              | () => {}                                     | Return reference to `react-native-maps` MapView component.                                                                                                                                                                      |
 | **clusteringEnabled**                       | Bool                  | true                                         | Set true to enable and false to disable clustering.                                                                                                                                                                             |
 | **renderCluster**                           | Function              | undefined                                    | Enables you to render custom cluster with custom styles and logic.                                                                                                                                                              |
+| **spiderLineColor**                           | String              | #FF0000                                    | Enables you to set color of spider line which joins spiral location with center location.                                                                                                                                                              |
 
 ## Support
 
