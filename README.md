@@ -13,7 +13,13 @@ This repo is proudly sponsored by:
 
 ## Demo
 
-![Demo](https://raw.githubusercontent.com/venits/react-native-map-clustering/master/assets/demo.gif)
+![Demo](https://raw.githubusercontent.com/venits/react-native-map-clustering/assets/assets/demo.gif)
+
+## Spiral
+
+### Converting same locations in spiral view (done automatically)
+
+![Spiral](https://raw.githubusercontent.com/venits/react-native-map-clustering/assets/assets/spider_lib.png)
 
 ## Installation
 
@@ -43,7 +49,6 @@ const INITIAL_REGION = {
 
 const App = () => (
   <MapView initialRegion={INITIAL_REGION} style={{ flex: 1 }}>
-    <Marker coordinate={{ latitude: 52.0, longitude: 18.2 }} />
     <Marker coordinate={{ latitude: 52.4, longitude: 18.7 }} />
     <Marker coordinate={{ latitude: 52.1, longitude: 18.4 }} />
     <Marker coordinate={{ latitude: 52.6, longitude: 18.3 }} />
@@ -51,6 +56,12 @@ const App = () => (
     <Marker coordinate={{ latitude: 53.1, longitude: 18.8 }} />
     <Marker coordinate={{ latitude: 52.9, longitude: 19.4 }} />
     <Marker coordinate={{ latitude: 52.2, longitude: 21 }} />
+    <Marker coordinate={{ latitude: 52.4, longitude: 21 }} />
+    <Marker coordinate={{ latitude: 51.8, longitude: 20 }} />
+    <Marker coordinate={{ latitude: 51.8, longitude: 20 }} />
+    <Marker coordinate={{ latitude: 51.8, longitude: 20 }} />
+    <Marker coordinate={{ latitude: 51.8, longitude: 20 }} />
+    <Marker coordinate={{ latitude: 51.8, longitude: 20 }} />
   </MapView>
 );
 
@@ -78,6 +89,7 @@ export default App;
 | **mapRef(ref)**                             | Function              | () => {}                                     | Return reference to `react-native-maps` MapView component.                                                                                                                                                                      |
 | **clusteringEnabled**                       | Bool                  | true                                         | Set true to enable and false to disable clustering.                                                                                                                                                                             |
 | **renderCluster**                           | Function              | undefined                                    | Enables you to render custom cluster with custom styles and logic.                                                                                                                                                              |
+| **spiderLineColor**                           | String              | #FF0000                                    | Enables you to set color of spider line which joins spiral location with center location.                                                                                                                                                              |
 
 ## Support
 
