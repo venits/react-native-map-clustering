@@ -90,6 +90,16 @@ export default App;
 | **clusteringEnabled**                       | Bool                  | true                                         | Set true to enable and false to disable clustering.                                                                                                                                                                             |
 | **renderCluster**                           | Function              | undefined                                    | Enables you to render custom cluster with custom styles and logic.                                                                                                                                                              |
 | **spiderLineColor**                           | String              | #FF0000                                    | Enables you to set color of spider line which joins spiral location with center location.                                                                                                                                                              |
+## Methods
+
+### `getClusterEngine()`
+
+Imperative method for accessing the cluster instance.
+
+```javascript
+// Cluster methods: https://github.com/mapbox/supercluster
+const clusterEnginer = clusterRef.current.getClusteringEngine();
+```
 
 ## Support
 
