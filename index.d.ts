@@ -22,9 +22,11 @@ declare module "react-native-map-clustering" {
     clusterTextColor?: string;
     clusterFontFamily?: string;
     spiderLineColor?: string;
+    superClusterRef: React.MutableRefObject;
     onClusterPress?: (cluster: Marker, markers?: Marker[]) => void;
-    mapRef?: (ref: React.Ref<Map>) => void;
+    getClusterEngine?: (ref: any) => void;
     onMarkersChange?: (markers?: Marker[]) => void;
+    renderCluster?: (cluster: any) => React.ReactNode;
   }
 
   export default class MapView extends React.Component<

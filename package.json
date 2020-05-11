@@ -1,7 +1,7 @@
 {
   "name": "react-native-map-clustering",
-  "version": "3.2.0",
-  "description": "React Native map clustering both for Android and iOS",
+  "version": "3.3.3",
+  "description": "React Native Map Clustering both for Android and iOS",
   "types": "index.d.ts",
   "main": "index.js",
   "scripts": {
