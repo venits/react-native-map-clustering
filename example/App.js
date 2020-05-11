@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import MapView from "react-native-map-clustering";
 import { Marker } from "react-native-maps";
 
@@ -36,8 +36,16 @@ const App = () => {
     return markers;
   };
 
+  // Use this mapRef var to call functions on your MapView manually.
+  // ex: mapRef.fitToCoordinates(...)
+  const mapRef = useRef(null)
+
   return (
-    <MapView initialRegion={INITIAL_REGION} style={{ flex: 1 }}>
+    <MapView
+      ref={mapRef}
+      initialRegion={INITIAL_REGION}
+      style={{ flex: 1 }}
+    >
       {_generateMarkers(200)}
     </MapView>
   );
