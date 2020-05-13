@@ -10,7 +10,7 @@ declare module "react-native-map-clustering" {
     spiralEnabled?: boolean;
     animationEnabled?: boolean;
     preserveClusterPressBehavior?: boolean;
-    tracksClusterViewChanges?: boolean;
+    tracksViewChanges?: boolean;
     layoutAnimationConf?: LayoutAnimationConfig;
     radius?: number;
     maxZoom?: number;
