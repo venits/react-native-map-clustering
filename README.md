@@ -76,6 +76,52 @@ export default App;
 | **renderCluster**                           | Function              | undefined                                    | Enables you to render custom cluster with custom styles and logic.                                                                                                                                                              |
 | **spiderLineColor**                         | String                | #FF0000                                      | Enables you to set color of spider line which joins spiral location with center location.                                                                                                                                       |
 
+## How to animate to region?
+
+Full example of how to use `animateToRegion()`.
+
+```js
+import React, { useRef } from "react";
+import { Button } from "react-native";
+import MapView from "react-native-map-clustering";
+import { Marker } from "react-native-maps";
+
+const INITIAL_REGION = {
+  latitude: 52.5,
+  longitude: 19.2,
+  latitudeDelta: 8.5,
+  longitudeDelta: 8.5,
+};
+
+const App = () => {
+  const mapRef = useRef();
+
+  const animateToRegion = () => {
+    let region = {
+      latitude: 42.5,
+      longitude: 15.2,
+      latitudeDelta: 7.5,
+      longitudeDelta: 7.5,
+    };
+
+    mapRef.current.animateToRegion(region, 2000);
+  };
+
+  return (
+    <>
+      <MapView
+        ref={mapRef}
+        initialRegion={INITIAL_REGION}
+        style={{ flex: 1 }}
+      />
+      <Button onPress={animateToRegion} title="Animate" />
+    </>
+  );
+};
+
+export default App;
+```
+
 #### This repo is proudly sponsored by:
 
 <a href="https://nativeforms.com" rel="nofollow" target="_blank">
