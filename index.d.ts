@@ -21,6 +21,8 @@ declare module "react-native-map-clustering" {
     clusterColor?: string;
     clusterTextColor?: string;
     clusterFontFamily?: string;
+    selectedClusterId?: string;
+    selectedClusterColor?: string;
     spiderLineColor?: string;
     superClusterRef?: React.MutableRefObject<any>;
     mapRef?: (ref: React.Ref<Map>) => void;
