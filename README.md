@@ -4,6 +4,13 @@ React Native module that handles map clustering for you.
 
 Works with **Expo** and **react-native-cli** 🚀
 
+This repo is proudly sponsored by:
+
+<a href="https://reactnativemarket.com/" rel="nofollow" target="_blank">
+  <img src="https://raw.githubusercontent.com/venits/react-native-market/master/assets/banner.png" width="280"><br />
+  React Native Templates & Starter Kits and Apps for easier start.
+</a>
+
 ## Demo
 
 ![Demo](https://raw.githubusercontent.com/venits/react-native-map-clustering/assets/assets/demo.gif)
@@ -11,11 +18,8 @@ Works with **Expo** and **react-native-cli** 🚀
 ## Installation
 
 ```js
-npm install react-native-map-clustering --save
-// yarn add react-native-map-clustering
-
-// and only if you haven't installed it before
-npm install react-native-maps --save
+npm install react-native-map-clustering react-native-maps --save
+// yarn add react-native-map-clustering react-native-maps
 ```
 
 ### Full example
@@ -52,7 +56,7 @@ export default App;
 ## Props
 
 | Name                                        | Type                  | Default                                      | Note                                                                                                                                                                                                                            |
-| ------------------------------------------- | --------------------- | -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ------------------------------------------- | --------------------- | -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
 | **clusterColor**                            | String                | #00B386                                      | Background color of cluster.                                                                                                                                                                                                    |
 | **clusterTextColor**                        | String                | #FFFFFF                                      | Color of text in cluster.                                                                                                                                                                                                       |
 | **clusterFontFamily**                       | String                | undefined                                    | Font family of text in cluster.                                                                                                                                                                                                 |
@@ -64,6 +68,7 @@ export default App;
 | **extent**                                  | Number                | 512                                          | [SuperCluster extent](https://github.com/mapbox/supercluster#options).                                                                                                                                                          |
 | **minZoom**                                 | Number                | 1                                            | [SuperCluster minZoom](https://github.com/mapbox/supercluster#options).                                                                                                                                                         |
 | **maxZoom**                                 | Number                | 20                                           | [SuperCluster maxZoom](https://github.com/mapbox/supercluster#options).                                                                                                                                                         |
+| **minPoints**                               | Number                | 2                                            | [SuperCluster minPoints](https://github.com/mapbox/supercluster#options).                                                                                                                                                       |
 | **preserveClusterPressBehavior**            | Bool                  | false                                        | If set to true, after clicking on cluster it will not be zoomed.                                                                                                                                                                |
 | **edgePadding**                             | Object                | { top: 50, left: 50, bottom: 50, right: 50 } | Edge padding for [react-native-maps's](https://github.com/react-community/react-native-maps/blob/master/docs/mapview.md#methods) `fitToCoordinates` method, called in `onClusterPress` for fitting to pressed cluster children. |
 | **animationEnabled**                        | Bool                  | true                                         | Animate imploding/exploding of clusters' markers and clusters size change. **Works only on iOS**.                                                                                                                               |
@@ -122,16 +127,9 @@ const App = () => {
 export default App;
 ```
 
-#### This repo is proudly sponsored by:
+### Support
 
-<a href="https://nativeforms.com" rel="nofollow" target="_blank">
-  <img src="https://raw.githubusercontent.com/venits/native-forms/master/assets/sponsor.png" width="350"><br />
-  Build forms, surveys and polls for React Native apps.
-</a>
-
-## Support
-
-Feel free to create issues and pull requests. I will try to provide as much support as possible over Github. In case of questions or problems, contact me at:
+Feel free to create issues and pull requests. I will try to provide as much support as possible over GitHub. In case of questions or problems, contact me at:
 [tony@venits.com](tony@venits.com)
 
 ### Happy Coding 💖🚀

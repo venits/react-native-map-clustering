@@ -17,10 +17,13 @@ declare module "react-native-map-clustering" {
     minZoom?: number;
     extent?: number;
     nodeSize?: number;
+    minPoints?: number;
     edgePadding?: { top: number; left: number; right: number; bottom: number };
     clusterColor?: string;
     clusterTextColor?: string;
     clusterFontFamily?: string;
+    selectedClusterId?: string;
+    selectedClusterColor?: string;
     spiderLineColor?: string;
     superClusterRef?: React.MutableRefObject<any>;
     mapRef?: (ref: React.Ref<Map>) => void;
