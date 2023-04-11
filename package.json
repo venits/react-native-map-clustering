@@ -31,7 +31,7 @@
     "@mapbox/geo-viewport": "^0.4.1"
   },
   "peerDependencies": {
-    "react-native-maps": "*",
+    "react-native-dogo-map": "*",
     "react-native": "*"
   }
 }
