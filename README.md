@@ -80,7 +80,7 @@ export default App;
 | **spiralEnabled**                           | Bool                  | true                                         | Set true to enable and false to disable spiral view.                                                                                                                                                                            |
 | **renderCluster**                           | Function              | undefined                                    | Enables you to render custom cluster with custom styles and logic.                                                                                                                                                              |
 | **spiderLineColor**                         | String                | #FF0000                                      | Enables you to set color of spider line which joins spiral location with center location.                                                                                                                                       |
-| **notToCluster**                         | Array                | []                                      | Pass a array marker keys to prevent Marker being wrapped into cluster.                                                                                                                                       |
+
 
 ## How to animate to region?
 
