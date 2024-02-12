@@ -37,7 +37,11 @@ const INITIAL_REGION = {
 };
 
 const App = () => (
-  <MapView initialRegion={INITIAL_REGION} style={{ flex: 1 }}>
+  <MapView
+    initialRegion={INITIAL_REGION}
+    style={{ flex: 1 }}
+    notToCluster={["dontClusterMe", "dontClusterMeToo"]}
+  >
     <Marker coordinate={{ latitude: 52.4, longitude: 18.7 }} />
     <Marker coordinate={{ latitude: 52.1, longitude: 18.4 }} />
     <Marker coordinate={{ latitude: 52.6, longitude: 18.3 }} />
@@ -47,6 +51,14 @@ const App = () => (
     <Marker coordinate={{ latitude: 52.2, longitude: 21 }} />
     <Marker coordinate={{ latitude: 52.4, longitude: 21 }} />
     <Marker coordinate={{ latitude: 51.8, longitude: 20 }} />
+    <Marker
+      key={"dontClusterMe"}
+      coordinate={{ latitude: 52.9, longitude: 21.5 }}
+    />
+    <Marker
+      key={"dontClusterMeToo"}
+      coordinate={{ latitude: 52.8, longitude: 21.5 }}
+    />
   </MapView>
 );
 
@@ -56,7 +68,7 @@ export default App;
 ## Props
 
 | Name                                        | Type                  | Default                                      | Note                                                                                                                                                                                                                            |
-| ------------------------------------------- | --------------------- | -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ------------------------------------------- | --------------------- | -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
 | **clusterColor**                            | String                | #00B386                                      | Background color of cluster.                                                                                                                                                                                                    |
 | **clusterTextColor**                        | String                | #FFFFFF                                      | Color of text in cluster.                                                                                                                                                                                                       |
 | **clusterFontFamily**                       | String                | undefined                                    | Font family of text in cluster.                                                                                                                                                                                                 |
@@ -80,6 +92,7 @@ export default App;
 | **spiralEnabled**                           | Bool                  | true                                         | Set true to enable and false to disable spiral view.                                                                                                                                                                            |
 | **renderCluster**                           | Function              | undefined                                    | Enables you to render custom cluster with custom styles and logic.                                                                                                                                                              |
 | **spiderLineColor**                         | String                | #FF0000                                      | Enables you to set color of spider line which joins spiral location with center location.                                                                                                                                       |
+| **notToCluster**                            | Array                 | []                                           | Pass an markers keys to avoid markerts wrapped into clusters                                                                                                                                                                    |
 
 ## How to animate to region?
 
